@@ -15,7 +15,7 @@ namespace Testing_the_GUI1
         public SerialPort serialPort;
         private TemperatureReader temperatureReader;
 
-        
+
 
         // Defines the event handler method
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -39,6 +39,9 @@ namespace Testing_the_GUI1
             temperatureReader.InitializeSerialPort("COM3");
             //This makes sure we get an updated temptrature in real time
             serialPort.DataReceived += SerialPort_DataReceived;
+            dropDownMenu1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            dropDownMenu2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
+
         }
 
 
@@ -50,12 +53,12 @@ namespace Testing_the_GUI1
             if (labelTemperature1.InvokeRequired)
             {
                 // If so, use Invoke to ensure the update happens on the UI thread
-                labelTemperature1.Invoke(new Action(() => labelTemperature1.Text = temperature + " 캜"));
+                labelTemperature1.Invoke(new Action(() => labelTemperature1.Text = temperature + " 째C"));
             }
             else
             {
                 // If not, update the label's text directly
-                labelTemperature1.Text = temperature + " 캜";
+                labelTemperature1.Text = temperature + " 째C";
             }
         }
 
@@ -65,12 +68,12 @@ namespace Testing_the_GUI1
             if (labelTemperature2.InvokeRequired)
             {
                 // If so, use Invoke to ensure the update happens on the UI thread
-                labelTemperature2.Invoke(new Action(() => labelTemperature2.Text = temperature + " 캜"));
+                labelTemperature2.Invoke(new Action(() => labelTemperature2.Text = temperature + " 째C"));
             }
             else
             {
                 // If not, update the label's text directly
-                labelTemperature2.Text = temperature + " 캜";
+                labelTemperature2.Text = temperature + " 째C";
             }
         }
 
@@ -79,8 +82,8 @@ namespace Testing_the_GUI1
             // Check if the serial port is open before attempting to write to it
             if (serialPort != null && serialPort.IsOpen)
             {
-                // Send a command to the serial port to turn on the LED
-                serialPort.WriteLine("1");
+                // Send a command to the serial port to turn on the step motor nr 1
+                serialPort.WriteLine("step1ON");
             }
             else
             {
@@ -91,11 +94,40 @@ namespace Testing_the_GUI1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            // Similar to button1_Click, but this time to turn off the LED
+            // Similar to button1_Click, but this time to turn off the step motor
             if (serialPort != null && serialPort.IsOpen)
             {
-                // Send a command to the serial port to turn off the LED
-                serialPort.WriteLine("0");
+                // Send a command to the serial port to turn off the step motor
+                serialPort.WriteLine("step1OFF");
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            // Similar to button1_Click, but this time to turn on magnet nr 1
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                // Send a command to the serial port to turn on the magnet
+                serialPort.WriteLine("mag1ON");
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+        }
+        private void button12_Click(object sender, EventArgs e)
+        {
+            
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                // Send a command to the serial port to turn of the magnet
+                serialPort.WriteLine("mag1OFF");
             }
             else
             {
@@ -116,13 +148,42 @@ namespace Testing_the_GUI1
         {
             // This is the button assigned to run the actual setting/program that is selected from the dropdown menu
 
-            if (dropDownMenu.SelectedItem == null)
+            if (dropDownMenu2.SelectedItem == null)
             {   // Different messages that will show in a messagebox depending on the dropdown menu item
                 MessageBox.Show("You did not select a program, please select a program");
             }
             else
             {
-                string selectedItem = dropDownMenu.SelectedItem.ToString();
+                string selectedItem = dropDownMenu2.SelectedItem.ToString();
+                if (selectedItem == "Program1")
+                {
+                    MessageBox.Show("Running your selected program: Program1");
+                }
+                else if (selectedItem == "Program2")
+                {
+                    MessageBox.Show("Running your selected program: Program2");
+                }
+                else if (selectedItem == "Program3")
+                {
+                    MessageBox.Show("Running your selected program: Program3");
+                }
+                else if (selectedItem == "Program4")
+                {
+                    MessageBox.Show("Running your selected program: Program4");
+                }
+            }
+        }
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            // This is the button assigned to run the actual setting/program that is selected from the dropdown menu
+
+            if (dropDownMenu1.SelectedItem == null)
+            {   // Different messages that will show in a messagebox depending on the dropdown menu item
+                MessageBox.Show("You did not select a program, please select a program");
+            }
+            else
+            {
+                string selectedItem = dropDownMenu1.SelectedItem.ToString();
                 if (selectedItem == "Program1")
                 {
                     MessageBox.Show("Running your selected program: Program1");
@@ -174,22 +235,36 @@ namespace Testing_the_GUI1
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Giving the dropdown menu a label that corresponds with the selected value and displaying it
-            selectValue.Text = dropDownMenu.Text;
+            selectedProgram1.Text = dropDownMenu1.Text;
         }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Giving the dropdown menu a label that corresponds with the selected value and displaying it
+            selectedProgram2.Text = dropDownMenu2.Text;
+        }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
             //Populate the dropdown menu with items
-            dropDownMenu.Items.Add("Program1");
-            dropDownMenu.Items.Add("Program2");
-            dropDownMenu.Items.Add("Program3");
-            dropDownMenu.Items.Add("Program4");
+            dropDownMenu1.Items.Add("Program1");
+            dropDownMenu1.Items.Add("Program2");
+            dropDownMenu1.Items.Add("Program3");
+            dropDownMenu1.Items.Add("Program4");
         }
 
         private void label6_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void dropDownMenu2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 
     public class TemperatureReader

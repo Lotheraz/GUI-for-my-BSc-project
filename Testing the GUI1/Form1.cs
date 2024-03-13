@@ -14,7 +14,7 @@ namespace Testing_the_GUI1
         // Declare the SerialPort object
         public SerialPort serialPort;
         private TemperatureReader temperatureReader;
-
+        private Dictionary<string, Action> stepActions;
 
 
         // Defines the event handler method
@@ -41,6 +41,15 @@ namespace Testing_the_GUI1
             serialPort.DataReceived += SerialPort_DataReceived;
             dropDownMenu1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             dropDownMenu2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
+
+            // Initialize the dictionary with actions for each step.
+            // Right now, they all show a message, but you could replace them with actual method calls.
+            stepActions = new Dictionary<string, Action>();
+            for (int i = 1; i <= 22; i++)
+            {
+                string stepName = $"Step{i}";
+                stepActions[stepName] = () => MessageBox.Show($"Running your selected program: {stepName}");
+            }
 
         }
 
@@ -144,61 +153,105 @@ namespace Testing_the_GUI1
             OpenFile(filePath);
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        /*private void button4_Click(object sender, EventArgs e)
         {
             // This is the button assigned to run the actual setting/program that is selected from the dropdown menu
 
             if (dropDownMenu2.SelectedItem == null)
             {   // Different messages that will show in a messagebox depending on the dropdown menu item
-                MessageBox.Show("You did not select a program, please select a program");
+                MessageBox.Show("You did not select a step, please select a step");
             }
             else
             {
                 string selectedItem = dropDownMenu2.SelectedItem.ToString();
-                if (selectedItem == "Program1")
+                if (selectedItem == "Step1")
                 {
-                    MessageBox.Show("Running your selected program: Program1");
+                    MessageBox.Show("Running your selected program: Step1");
                 }
-                else if (selectedItem == "Program2")
+                else if (selectedItem == "Step2")
                 {
-                    MessageBox.Show("Running your selected program: Program2");
+                    MessageBox.Show("Running your selected program: Step2");
                 }
-                else if (selectedItem == "Program3")
+                else if (selectedItem == "Step3")
                 {
-                    MessageBox.Show("Running your selected program: Program3");
+                    MessageBox.Show("Running your selected program: Step3");
                 }
-                else if (selectedItem == "Program4")
+                else if (selectedItem == "Step4")
                 {
-                    MessageBox.Show("Running your selected program: Program4");
+                    MessageBox.Show("Running your selected program: Step4");
+                }
+            }
+        }*/
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            // This is the button assigned to run the actual setting/program that is selected from the dropdown menu
+            if (dropDownMenu2.SelectedItem == null)
+            {
+                // Different messages that will show in a messagebox depending on the dropdown menu item
+                MessageBox.Show("You did not select a step, please select a step");
+            }
+            else
+            {
+                string selectedItem = dropDownMenu2.SelectedItem.ToString();
+                if (stepActions.TryGetValue(selectedItem, out var action))
+                {
+                    action.Invoke();
+                }
+                else
+                {
+                    MessageBox.Show("Unknown step selected.");
                 }
             }
         }
+        /* private void button3_Click_1(object sender, EventArgs e)
+         {
+             // This is the button assigned to run the actual setting/program that is selected from the dropdown menu
+
+             if (dropDownMenu1.SelectedItem == null)
+             {   // Different messages that will show in a messagebox depending on the dropdown menu item
+                 MessageBox.Show("You did not select a step, please select a step");
+             }
+             else
+             {
+                 string selectedItem = dropDownMenu1.SelectedItem.ToString();
+                 if (selectedItem == "Step1")
+                 {
+                     MessageBox.Show("Running your selected program: Step1");
+                 }
+                 else if (selectedItem == "Step2")
+                 {
+                     MessageBox.Show("Running your selected program: Step2");
+                 }
+                 else if (selectedItem == "Step3")
+                 {
+                     MessageBox.Show("Running your selected program: Step3");
+                 }
+                 else if (selectedItem == "Step4")
+                 {
+                     MessageBox.Show("Running your selected program: Step4");
+                 }
+             }
+         }*/
+
         private void button3_Click_1(object sender, EventArgs e)
         {
             // This is the button assigned to run the actual setting/program that is selected from the dropdown menu
-
             if (dropDownMenu1.SelectedItem == null)
-            {   // Different messages that will show in a messagebox depending on the dropdown menu item
-                MessageBox.Show("You did not select a program, please select a program");
+            {
+                // Different messages that will show in a messagebox depending on the dropdown menu item
+                MessageBox.Show("You did not select a step, please select a step");
             }
             else
             {
                 string selectedItem = dropDownMenu1.SelectedItem.ToString();
-                if (selectedItem == "Program1")
+                if (stepActions.TryGetValue(selectedItem, out var action))
                 {
-                    MessageBox.Show("Running your selected program: Program1");
+                    action.Invoke();
                 }
-                else if (selectedItem == "Program2")
+                else
                 {
-                    MessageBox.Show("Running your selected program: Program2");
-                }
-                else if (selectedItem == "Program3")
-                {
-                    MessageBox.Show("Running your selected program: Program3");
-                }
-                else if (selectedItem == "Program4")
-                {
-                    MessageBox.Show("Running your selected program: Program4");
+                    MessageBox.Show("Unknown step selected.");
                 }
             }
         }
@@ -248,10 +301,10 @@ namespace Testing_the_GUI1
         private void Form1_Load(object sender, EventArgs e)
         {
             //Populate the dropdown menu with items
-            dropDownMenu1.Items.Add("Program1");
-            dropDownMenu1.Items.Add("Program2");
-            dropDownMenu1.Items.Add("Program3");
-            dropDownMenu1.Items.Add("Program4");
+            dropDownMenu1.Items.Add("Step1");
+            dropDownMenu1.Items.Add("Step2");
+            dropDownMenu1.Items.Add("Step3");
+            dropDownMenu1.Items.Add("Step4");
         }
 
         private void label6_Click(object sender, EventArgs e)

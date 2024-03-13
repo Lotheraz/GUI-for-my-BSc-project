@@ -305,6 +305,25 @@ namespace Testing_the_GUI1
             dropDownMenu1.Items.Add("Step2");
             dropDownMenu1.Items.Add("Step3");
             dropDownMenu1.Items.Add("Step4");
+            dropDownMenu1.Items.Add("Step5");
+            dropDownMenu1.Items.Add("Step6");
+            dropDownMenu1.Items.Add("Step7");
+            dropDownMenu1.Items.Add("Step8");
+            dropDownMenu1.Items.Add("Step9");
+            dropDownMenu1.Items.Add("Step10");
+            dropDownMenu1.Items.Add("Step11");
+            dropDownMenu1.Items.Add("Step12");
+            dropDownMenu1.Items.Add("Step13");
+            dropDownMenu1.Items.Add("Step14");
+            dropDownMenu1.Items.Add("Step15");
+            dropDownMenu1.Items.Add("Step16");
+            dropDownMenu1.Items.Add("Step17");
+            dropDownMenu1.Items.Add("Step18");
+            dropDownMenu1.Items.Add("Step19");
+            dropDownMenu1.Items.Add("Step20");
+            dropDownMenu1.Items.Add("Step21");
+            dropDownMenu1.Items.Add("Step22");
+
         }
 
         private void label6_Click(object sender, EventArgs e)

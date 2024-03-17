@@ -134,7 +134,7 @@ namespace Testing_the_GUI1
             dropDownMenu1.Items.AddRange(new object[] { "Step1", "Step2", "Step3", "Step4", "Step5", "Step6", "Step7", "Step8", "Step9", "Step10", "Step11", "Step12", "Step13", "Step14", "Step15", "Step16", "Step17", "Step18", "Step19", "Step20", "Step21", "Step22" });
             dropDownMenu1.Location = new Point(173, 26);
             dropDownMenu1.Name = "dropDownMenu1";
-            dropDownMenu1.Size = new Size(241, 39);
+            dropDownMenu1.Size = new Size(241, 34);
             dropDownMenu1.TabIndex = 5;
             dropDownMenu1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
@@ -145,7 +145,7 @@ namespace Testing_the_GUI1
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.Location = new Point(960, 739);
             label1.Name = "label1";
-            label1.Size = new Size(86, 28);
+            label1.Size = new Size(68, 21);
             label1.TabIndex = 7;
             label1.Text = "Selected";
             // 
@@ -156,7 +156,7 @@ namespace Testing_the_GUI1
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label2.Location = new Point(9, 24);
             label2.Name = "label2";
-            label2.Size = new Size(173, 28);
+            label2.Size = new Size(138, 21);
             label2.TabIndex = 8;
             label2.Text = "Program Selection";
             // 
@@ -168,7 +168,7 @@ namespace Testing_the_GUI1
             selectedProgram1.Location = new Point(1084, 732);
             selectedProgram1.Name = "selectedProgram1";
             selectedProgram1.Padding = new Padding(1);
-            selectedProgram1.Size = new Size(31, 39);
+            selectedProgram1.Size = new Size(24, 32);
             selectedProgram1.TabIndex = 9;
             selectedProgram1.Text = "?";
             // 
@@ -179,7 +179,7 @@ namespace Testing_the_GUI1
             TemperatureLabel.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             TemperatureLabel.Location = new Point(442, 723);
             TemperatureLabel.Name = "TemperatureLabel";
-            TemperatureLabel.Size = new Size(210, 46);
+            TemperatureLabel.Size = new Size(165, 37);
             TemperatureLabel.TabIndex = 10;
             TemperatureLabel.Text = "Temperature";
             // 
@@ -191,7 +191,7 @@ namespace Testing_the_GUI1
             labelTemperature1.ForeColor = Color.Red;
             labelTemperature1.Location = new Point(639, 723);
             labelTemperature1.Name = "labelTemperature1";
-            labelTemperature1.Size = new Size(35, 46);
+            labelTemperature1.Size = new Size(29, 37);
             labelTemperature1.TabIndex = 11;
             labelTemperature1.Text = "?";
             // 
@@ -207,7 +207,6 @@ namespace Testing_the_GUI1
             tabControl1.Size = new Size(1412, 848);
             tabControl1.SizeMode = TabSizeMode.FillToRight;
             tabControl1.TabIndex = 12;
-            tabControl1.Click += button4_Click;
             // 
             // tabPage1
             // 
@@ -221,10 +220,10 @@ namespace Testing_the_GUI1
             tabPage1.Controls.Add(selectedProgram1);
             tabPage1.Controls.Add(Calibrate);
             tabPage1.Controls.Add(label1);
-            tabPage1.Location = new Point(4, 43);
+            tabPage1.Location = new Point(4, 38);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1404, 801);
+            tabPage1.Size = new Size(1404, 806);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "User Mode";
             // 
@@ -235,7 +234,7 @@ namespace Testing_the_GUI1
             label7.ForeColor = Color.Firebrick;
             label7.Location = new Point(1179, 26);
             label7.Name = "label7";
-            label7.Size = new Size(247, 32);
+            label7.Size = new Size(198, 26);
             label7.TabIndex = 14;
             label7.Text = "User Mode Selected";
             // 
@@ -289,10 +288,10 @@ namespace Testing_the_GUI1
             tabPage2.Controls.Add(button5);
             tabPage2.Controls.Add(button4);
             tabPage2.Font = new Font("Microsoft Sans Serif", 9.75F);
-            tabPage2.Location = new Point(4, 43);
+            tabPage2.Location = new Point(4, 38);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1404, 801);
+            tabPage2.Size = new Size(1404, 806);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Operator Mode";
             // 
@@ -303,7 +302,7 @@ namespace Testing_the_GUI1
             label8.ForeColor = Color.Firebrick;
             label8.Location = new Point(1147, 26);
             label8.Name = "label8";
-            label8.Size = new Size(301, 29);
+            label8.Size = new Size(239, 24);
             label8.TabIndex = 43;
             label8.Text = "Operator Mode Selected";
             // 
@@ -581,7 +580,7 @@ namespace Testing_the_GUI1
             labelTemperature2.ForeColor = Color.Red;
             labelTemperature2.Location = new Point(639, 723);
             labelTemperature2.Name = "labelTemperature2";
-            labelTemperature2.Size = new Size(35, 46);
+            labelTemperature2.Size = new Size(29, 37);
             labelTemperature2.TabIndex = 14;
             labelTemperature2.Text = "?";
             // 
@@ -593,7 +592,7 @@ namespace Testing_the_GUI1
             selectedProgram2.Location = new Point(1084, 732);
             selectedProgram2.Name = "selectedProgram2";
             selectedProgram2.Padding = new Padding(1);
-            selectedProgram2.Size = new Size(31, 39);
+            selectedProgram2.Size = new Size(24, 32);
             selectedProgram2.TabIndex = 14;
             selectedProgram2.Text = "?";
             // 
@@ -604,10 +603,10 @@ namespace Testing_the_GUI1
             label6.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label6.Location = new Point(442, 723);
             label6.Name = "label6";
-            label6.Size = new Size(210, 46);
+            label6.Size = new Size(165, 37);
             label6.TabIndex = 13;
             label6.Text = "Temperature";
-            label6.Click += label6_Click;
+            
             // 
             // label4
             // 
@@ -616,7 +615,7 @@ namespace Testing_the_GUI1
             label4.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.Location = new Point(960, 739);
             label4.Name = "label4";
-            label4.Size = new Size(86, 28);
+            label4.Size = new Size(68, 21);
             label4.TabIndex = 15;
             label4.Text = "Selected";
             // 
@@ -627,9 +626,9 @@ namespace Testing_the_GUI1
             dropDownMenu2.Items.AddRange(new object[] { "Step1", "Step2", "Step3", "Step4", "Step5", "Step6", "Step7", "Step8", "Step9", "Step10", "Step11", "Step12", "Step13", "Step14", "Step15", "Step16", "Step17", "Step18", "Step19", "Step20", "Step21", "Step22" });
             dropDownMenu2.Location = new Point(173, 26);
             dropDownMenu2.Name = "dropDownMenu2";
-            dropDownMenu2.Size = new Size(241, 28);
+            dropDownMenu2.Size = new Size(241, 24);
             dropDownMenu2.TabIndex = 17;
-            dropDownMenu2.SelectedIndexChanged += dropDownMenu2_SelectedIndexChanged;
+        
             // 
             // label5
             // 
@@ -638,7 +637,7 @@ namespace Testing_the_GUI1
             label5.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label5.Location = new Point(9, 24);
             label5.Name = "label5";
-            label5.Size = new Size(173, 28);
+            label5.Size = new Size(138, 21);
             label5.TabIndex = 16;
             label5.Text = "Program Selection";
             // 

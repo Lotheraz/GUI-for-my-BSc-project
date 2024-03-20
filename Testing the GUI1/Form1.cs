@@ -16,6 +16,15 @@ namespace Testing_the_GUI1
         private TemperatureReader temperatureReader;
         private Dictionary<string, Action> stepActions;
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Close the serial port when the form is closing.
+            if (serialPort.IsOpen)
+            {
+                serialPort.Close();
+            }
+        }
+
 
         // Defines the event handler method
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -24,7 +33,7 @@ namespace Testing_the_GUI1
             string temperature = serialPort.ReadLine();
 
             // Update the temperature label on the form
-            UpdateTemperatureLabel1(temperature);
+            UpdateTemperaturelabelTemperature2(temperature);
         }
 
 
@@ -41,6 +50,8 @@ namespace Testing_the_GUI1
             serialPort.DataReceived += SerialPort_DataReceived;
             dropDownMenu1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             dropDownMenu2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
+            // Close
+            this.FormClosing += new FormClosingEventHandler(Form1_FormClosing);
 
             // Initialize the dictionary with actions for each step.
             // Right now, they all show a message, but you could replace them with actual method calls.
@@ -56,18 +67,18 @@ namespace Testing_the_GUI1
 
 
         // Public method to safely update the temperature label on the form
-        public void UpdateTemperatureLabel1(string temperature)
+        public void UpdateTemperaturelabelTemperature2(string temperature)
         {
             // Check if the update of label's text needs to be done on the UI thread
-            if (labelTemperature1.InvokeRequired)
+            if (labelTemperature2.InvokeRequired)
             {
                 // If so, use Invoke to ensure the update happens on the UI thread
-                labelTemperature1.Invoke(new Action(() => labelTemperature1.Text = temperature + " °C"));
+                labelTemperature2.Invoke(new Action(() => labelTemperature2.Text = temperature + " °C"));
             }
             else
             {
                 // If not, update the label's text directly
-                labelTemperature1.Text = temperature + " °C";
+                labelTemperature2.Text = temperature + " °C";
             }
         }
 
@@ -89,15 +100,18 @@ namespace Testing_the_GUI1
         private void button1_Click(object sender, EventArgs e)
         {
             // Check if the serial port is open before attempting to write to it
-            if (serialPort != null && serialPort.IsOpen)
+            try
             {
-                // Send a command to the serial port to turn on the step motor nr 1
-                serialPort.WriteLine("step1ON");
+                if (!serialPort.IsOpen)
+                {
+                    serialPort.Open();
+                    serialPort.WriteLine("11");
+                    // Note: Do not close the port here if you want to read the response.
+                }
             }
-            else
+            catch (Exception ex)
             {
-                // If the serial port is not open, inform the user
-                MessageBox.Show("Serial port is not open.");
+                MessageBox.Show("Error opening/writing to serial port :: " + ex.Message, "Error");
             }
         }
 
@@ -182,6 +196,27 @@ namespace Testing_the_GUI1
                 }
             }
         }*/
+
+        private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
+        {
+            SerialPort sp = (SerialPort)sender;
+            string indata = sp.ReadLine(); // Read the incoming data.
+            UpdateGuiLabel(indata); // Update the GUI with the received data.
+        }
+
+        // This method safely updates the label text with the received data.
+        private void UpdateGuiLabel(string data)
+        {
+            if (labelTemperature2.InvokeRequired)
+            {
+                // Use BeginInvoke to avoid potential deadlock in some edge cases
+                labelTemperature2.BeginInvoke(new MethodInvoker(delegate { labelTemperature2.Text = data; }));
+            }
+            else
+            {
+                labelTemperature2.Text = data;
+            }
+        }
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -367,7 +402,7 @@ namespace Testing_the_GUI1
                 // Attach the event handler method for data received events.
                 serialPort.DataReceived += new SerialDataReceivedEventHandler(SerialPortDataReceived);
                 // Open the serial port for communications.
-                serialPort.Open();
+                // serialPort.Open();
             }
             catch (Exception ex) // Catch any exceptions thrown during the opening of the serial port.
             {
@@ -400,7 +435,7 @@ namespace Testing_the_GUI1
                 formInstance.BeginInvoke(new Action(() =>
                 {
                     // Invoke method to update the GUI
-                    formInstance.UpdateTemperatureLabel1(data.Trim()); 
+                    formInstance.UpdateTemperaturelabelTemperature2(data.Trim()); 
                 }));
             }
             catch (TimeoutException)
@@ -414,13 +449,10 @@ namespace Testing_the_GUI1
             }
             // Other specific exceptions related to the SerialPort can be caught here if needed
         }
+        
 
 
-        public void CloseSerialPort()
-        {
-            // At the end, checks if the serialport is open and if it is, closes it
-            if (serialPort != null && serialPort.IsOpen)
-                serialPort.Close();
-        }
     }
+   
+
 }

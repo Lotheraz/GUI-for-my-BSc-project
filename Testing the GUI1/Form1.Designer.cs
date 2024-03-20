@@ -574,13 +574,12 @@ namespace Testing_the_GUI1
             // 
             // labelTemperature2
             // 
-            labelTemperature2.AutoSize = true;
             labelTemperature2.BackColor = SystemColors.ActiveCaption;
             labelTemperature2.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelTemperature2.ForeColor = Color.Red;
             labelTemperature2.Location = new Point(639, 723);
             labelTemperature2.Name = "labelTemperature2";
-            labelTemperature2.Size = new Size(29, 37);
+            labelTemperature2.Size = new Size(98, 70);
             labelTemperature2.TabIndex = 14;
             labelTemperature2.Text = "?";
             // 
@@ -606,7 +605,6 @@ namespace Testing_the_GUI1
             label6.Size = new Size(165, 37);
             label6.TabIndex = 13;
             label6.Text = "Temperature";
-            
             // 
             // label4
             // 
@@ -628,7 +626,6 @@ namespace Testing_the_GUI1
             dropDownMenu2.Name = "dropDownMenu2";
             dropDownMenu2.Size = new Size(241, 24);
             dropDownMenu2.TabIndex = 17;
-        
             // 
             // label5
             // 

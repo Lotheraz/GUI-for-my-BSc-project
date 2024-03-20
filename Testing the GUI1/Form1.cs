@@ -63,7 +63,27 @@ namespace Testing_the_GUI1
             }
 
         }
+        public void UpdateTemperatureLabels(string temperature)
+        {
+            Action updateAction = () =>
+            {
+                // Assuming labelTemperature1 and labelTemperature2 are the label controls
+                labelTemperature1.Text = temperature + " °C";
+                labelTemperature2.Text = temperature + " °C";
+            };
 
+            // Check if the update of label's text needs to be done on the UI thread
+            if (labelTemperature1.InvokeRequired || labelTemperature2.InvokeRequired)
+            {
+                // Use Invoke to ensure the update happens on the UI thread
+                this.Invoke(updateAction);
+            }
+            else
+            {
+                // If not, update the label's text directly
+                updateAction();
+            }
+        }
 
 
         // Public method to safely update the temperature label on the form
@@ -82,20 +102,7 @@ namespace Testing_the_GUI1
             }
         }
 
-        public void UpdateTemperatureLabel2(string temperature)
-        {
-            // Check if the update of label's text needs to be done on the UI thread
-            if (labelTemperature2.InvokeRequired)
-            {
-                // If so, use Invoke to ensure the update happens on the UI thread
-                labelTemperature2.Invoke(new Action(() => labelTemperature2.Text = temperature + " °C"));
-            }
-            else
-            {
-                // If not, update the label's text directly
-                labelTemperature2.Text = temperature + " °C";
-            }
-        }
+        
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -365,7 +372,7 @@ namespace Testing_the_GUI1
         // Reference to the serialPort instance
         private SerialPort serialPort;
         // Reference to the Form1 instance
-        private Form1 formInstance; 
+        private Form1 formInstance;
 
         public TemperatureReader(Form1 form)
         {
@@ -428,11 +435,11 @@ namespace Testing_the_GUI1
             try
             {
                 // Read the data asynchronously
-                string data = serialPort.ReadLine(); 
+                string data = serialPort.ReadLine();
                 formInstance.BeginInvoke(new Action(() =>
                 {
                     // Invoke method to update the GUI
-                    formInstance.UpdateTemperaturelabelTemperature2(data.Trim()); 
+                    formInstance.UpdateTemperatureLabels(data.Trim());
                 }));
             }
             catch (TimeoutException)
@@ -442,14 +449,15 @@ namespace Testing_the_GUI1
             }
             catch (IOException ex)
             {
-            // Handle I/O exceptions that might occur if the serial port is suddenly disconnected, etc.
+                // Handle I/O exceptions that might occur if the serial port is suddenly disconnected, etc.
             }
             // Other specific exceptions related to the SerialPort can be caught here if needed
+
+
+
         }
-        
 
 
     }
-   
-
 }
+

@@ -15,7 +15,7 @@ namespace Testing_the_GUI1
         public SerialPort serialPort;
         private TemperatureReader temperatureReader;
         private Dictionary<string, Action> stepActions;
-
+        
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Close the serial port when the form is closing.
@@ -24,7 +24,7 @@ namespace Testing_the_GUI1
                 serialPort.Close();
             }
         }
-
+        
 
         // Defines the event handler method
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -35,7 +35,6 @@ namespace Testing_the_GUI1
             // Update the temperature label on the form
             UpdateTemperaturelabelTemperature2(temperature);
         }
-
 
         public Form1()
         {
@@ -52,6 +51,7 @@ namespace Testing_the_GUI1
             dropDownMenu2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
             // Close
             this.FormClosing += new FormClosingEventHandler(Form1_FormClosing);
+            serialPort.Open();
 
             // Initialize the dictionary with actions for each step.
             // Right now, they all show a message, but you could replace them with actual method calls.
@@ -100,18 +100,15 @@ namespace Testing_the_GUI1
         private void button1_Click(object sender, EventArgs e)
         {
             // Check if the serial port is open before attempting to write to it
-            try
+            if (serialPort != null && serialPort.IsOpen)
             {
-                if (!serialPort.IsOpen)
-                {
-                    serialPort.Open();
-                    serialPort.WriteLine("11");
-                    // Note: Do not close the port here if you want to read the response.
-                }
+                // Send a command to the serial port to turn off the step motor
+                serialPort.WriteLine("11");
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Error opening/writing to serial port :: " + ex.Message, "Error");
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
             }
         }
 
@@ -121,7 +118,7 @@ namespace Testing_the_GUI1
             if (serialPort != null && serialPort.IsOpen)
             {
                 // Send a command to the serial port to turn off the step motor
-                serialPort.WriteLine("step1OFF");
+                serialPort.WriteLine("12");
             }
             else
             {
@@ -136,7 +133,7 @@ namespace Testing_the_GUI1
             if (serialPort != null && serialPort.IsOpen)
             {
                 // Send a command to the serial port to turn on the magnet
-                serialPort.WriteLine("mag1ON");
+                serialPort.WriteLine("13");
             }
             else
             {

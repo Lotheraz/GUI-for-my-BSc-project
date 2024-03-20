@@ -574,12 +574,13 @@ namespace Testing_the_GUI1
             // 
             // labelTemperature2
             // 
+            labelTemperature2.AutoSize = true;
             labelTemperature2.BackColor = SystemColors.ActiveCaption;
             labelTemperature2.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelTemperature2.ForeColor = Color.Red;
             labelTemperature2.Location = new Point(639, 723);
             labelTemperature2.Name = "labelTemperature2";
-            labelTemperature2.Size = new Size(98, 70);
+            labelTemperature2.Size = new Size(29, 37);
             labelTemperature2.TabIndex = 14;
             labelTemperature2.Text = "?";
             // 

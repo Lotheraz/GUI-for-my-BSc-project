@@ -33,18 +33,18 @@ namespace Testing_the_GUI1
             string temperature = serialPort.ReadLine();
 
             // Update the temperature label on the form
-            UpdateTemperaturelabelTemperature2(temperature);
+            UpdateTemperatureLabels(temperature);
         }
 
         public Form1()
         {
             InitializeComponent();
-            // Adjust "COM3" as per your Arduino connection
-            serialPort = new SerialPort("COM3", 9600);
+            // Adjust "COM4" as per your Arduino connection
+            serialPort = new SerialPort("COM4", 9600);
             // Initialize the TemperatureReader with this form instance
             temperatureReader = new TemperatureReader(this);
             // Initialize the serial port in TemperatureReader
-            temperatureReader.InitializeSerialPort("COM3");
+            temperatureReader.InitializeSerialPort("COM4");
             //This makes sure we get an updated temptrature in real time
             serialPort.DataReceived += SerialPort_DataReceived;
             dropDownMenu1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
@@ -52,7 +52,7 @@ namespace Testing_the_GUI1
             // Close
             this.FormClosing += new FormClosingEventHandler(Form1_FormClosing);
             serialPort.Open();
-
+            
             // Initialize the dictionary with actions for each step.
             // Right now, they all show a message, but you could replace them with actual method calls.
             stepActions = new Dictionary<string, Action>();
@@ -65,11 +65,17 @@ namespace Testing_the_GUI1
         }
         public void UpdateTemperatureLabels(string temperature)
         {
+            // Trim the newline or carriage return characters from the end of the string
+            string trimmedTemperature = temperature.TrimEnd('\r', '\n');
+
+            // Append "C" to the trimmed temperature string
+            string displayText = trimmedTemperature + " °C";
+
             Action updateAction = () =>
             {
                 // Assuming labelTemperature1 and labelTemperature2 are the label controls
-                labelTemperature1.Text = temperature + " °C";
-                labelTemperature2.Text = temperature + " °C";
+                labelTemperature1.Text = displayText;
+                labelTemperature2.Text = displayText;
             };
 
             // Check if the update of label's text needs to be done on the UI thread
@@ -87,7 +93,7 @@ namespace Testing_the_GUI1
 
 
         // Public method to safely update the temperature label on the form
-        public void UpdateTemperaturelabelTemperature2(string temperature)
+       /* public void UpdateTemperaturelabelTemperature2(string temperature)
         {
             // Check if the update of label's text needs to be done on the UI thread
             if (labelTemperature2.InvokeRequired)
@@ -100,7 +106,7 @@ namespace Testing_the_GUI1
                 // If not, update the label's text directly
                 labelTemperature2.Text = temperature + " °C";
             }
-        }
+        }*/
 
         
 

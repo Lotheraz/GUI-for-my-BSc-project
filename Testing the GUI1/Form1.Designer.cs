@@ -41,6 +41,7 @@ namespace Testing_the_GUI1
             labelTemperature1 = new Label();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            dateTimePicker1 = new DateTimePicker();
             label7 = new Label();
             button3 = new Button();
             tabPage2 = new TabPage();
@@ -76,6 +77,7 @@ namespace Testing_the_GUI1
             dropDownMenu2 = new ComboBox();
             label5 = new Label();
             button5 = new Button();
+            colorDialog1 = new ColorDialog();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -87,9 +89,9 @@ namespace Testing_the_GUI1
             button1.Font = new Font("Microsoft Sans Serif", 9.75F);
             button1.Location = new Point(9, 248);
             button1.Name = "button1";
-            button1.Size = new Size(96, 48);
+            button1.Size = new Size(168, 48);
             button1.TabIndex = 0;
-            button1.Text = "Turn On Stepmotor1";
+            button1.Text = "Move Stepmotor1 Up";
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
@@ -97,11 +99,11 @@ namespace Testing_the_GUI1
             // 
             button2.BackColor = Color.Red;
             button2.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button2.Location = new Point(126, 248);
+            button2.Location = new Point(183, 248);
             button2.Name = "button2";
-            button2.Size = new Size(96, 48);
+            button2.Size = new Size(161, 48);
             button2.TabIndex = 1;
-            button2.Text = "Turn Off Stepmotor1";
+            button2.Text = "Move Stepmotor1 Down";
             button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click;
             // 
@@ -131,7 +133,7 @@ namespace Testing_the_GUI1
             // 
             dropDownMenu1.DropDownStyle = ComboBoxStyle.DropDownList;
             dropDownMenu1.FormattingEnabled = true;
-            dropDownMenu1.Items.AddRange(new object[] { "Step1", "Step2", "Step3", "Step4", "Step5", "Step6", "Step7", "Step8", "Step9", "Step10", "Step11", "Step12", "Step13", "Step14", "Step15", "Step16", "Step17", "Step18", "Step19", "Step20", "Step21", "Step22" });
+            dropDownMenu1.Items.AddRange(new object[] { "Run All Steps", "Step2", "Step3", "Step4", "Step5", "Step6", "Step7", "Step8", "Step9", "Step10", "Step11", "Step12", "Step13", "Step14", "Step15", "Step16", "Step17", "Step18", "Step19", "Step20", "Step21", "Step22", "Step23", "Step24" });
             dropDownMenu1.Location = new Point(173, 26);
             dropDownMenu1.Name = "dropDownMenu1";
             dropDownMenu1.Size = new Size(241, 34);
@@ -211,6 +213,7 @@ namespace Testing_the_GUI1
             // tabPage1
             // 
             tabPage1.BackColor = Color.CornflowerBlue;
+            tabPage1.Controls.Add(dateTimePicker1);
             tabPage1.Controls.Add(label7);
             tabPage1.Controls.Add(button3);
             tabPage1.Controls.Add(label2);
@@ -226,6 +229,13 @@ namespace Testing_the_GUI1
             tabPage1.Size = new Size(1404, 806);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "User Mode";
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Location = new Point(11, 757);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(365, 32);
+            dateTimePicker1.TabIndex = 15;
             // 
             // label7
             // 
@@ -310,183 +320,199 @@ namespace Testing_the_GUI1
             // 
             button28.BackColor = Color.Red;
             button28.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button28.Location = new Point(390, 468);
+            button28.Location = new Point(592, 468);
             button28.Name = "button28";
             button28.Size = new Size(96, 48);
             button28.TabIndex = 42;
             button28.Text = "Turn Off Magnet 2";
             button28.UseVisualStyleBackColor = false;
+            button28.Click += button28_Click;
             // 
             // button29
             // 
             button29.BackColor = Color.Green;
             button29.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button29.Location = new Point(273, 464);
+            button29.Location = new Point(475, 464);
             button29.Name = "button29";
             button29.Size = new Size(96, 48);
             button29.TabIndex = 41;
             button29.Text = "Turn On Magnet 2";
             button29.UseVisualStyleBackColor = false;
+            button29.Click += button29_Click;
             // 
             // button26
             // 
             button26.BackColor = Color.Red;
             button26.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button26.Location = new Point(390, 414);
+            button26.Location = new Point(592, 414);
             button26.Name = "button26";
             button26.Size = new Size(96, 48);
             button26.TabIndex = 40;
             button26.Text = "Turn Off Magnet 3";
             button26.UseVisualStyleBackColor = false;
+            button26.Click += button26_Click;
             // 
             // button27
             // 
             button27.BackColor = Color.Green;
             button27.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button27.Location = new Point(274, 410);
+            button27.Location = new Point(476, 410);
             button27.Name = "button27";
             button27.Size = new Size(96, 48);
             button27.TabIndex = 39;
             button27.Text = "Turn On Magnet 3";
             button27.UseVisualStyleBackColor = false;
+            button27.Click += button27_Click;
             // 
             // button24
             // 
             button24.BackColor = Color.Red;
             button24.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button24.Location = new Point(390, 194);
+            button24.Location = new Point(592, 194);
             button24.Name = "button24";
             button24.Size = new Size(96, 48);
             button24.TabIndex = 38;
             button24.Text = "Turn Off Magnet 7";
             button24.UseVisualStyleBackColor = false;
+            button24.Click += button24_Click;
             // 
             // button25
             // 
             button25.BackColor = Color.Green;
             button25.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button25.Location = new Point(273, 194);
+            button25.Location = new Point(475, 194);
             button25.Name = "button25";
             button25.Size = new Size(96, 48);
             button25.TabIndex = 37;
             button25.Text = "Turn On Magnet 7";
             button25.UseVisualStyleBackColor = false;
+            button25.Click += button25_Click;
             // 
             // button22
             // 
             button22.BackColor = Color.Red;
             button22.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button22.Location = new Point(390, 140);
+            button22.Location = new Point(592, 140);
             button22.Name = "button22";
             button22.Size = new Size(96, 48);
             button22.TabIndex = 36;
             button22.Text = "Turn Off Magnet 8";
             button22.UseVisualStyleBackColor = false;
+            button22.Click += button22_Click;
             // 
             // button23
             // 
             button23.BackColor = Color.Green;
             button23.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button23.Location = new Point(273, 140);
+            button23.Location = new Point(475, 140);
             button23.Name = "button23";
             button23.Size = new Size(96, 48);
             button23.TabIndex = 35;
             button23.Text = "Turn On Magnet 8";
             button23.UseVisualStyleBackColor = false;
+            button23.Click += button23_Click;
             // 
             // button20
             // 
             button20.BackColor = Color.Red;
             button20.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button20.Location = new Point(390, 248);
+            button20.Location = new Point(592, 248);
             button20.Name = "button20";
             button20.Size = new Size(96, 48);
             button20.TabIndex = 34;
             button20.Text = "Turn Off Magnet 6";
             button20.UseVisualStyleBackColor = false;
+            button20.Click += button20_Click;
             // 
             // button21
             // 
             button21.BackColor = Color.Green;
             button21.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button21.Location = new Point(274, 248);
+            button21.Location = new Point(476, 248);
             button21.Name = "button21";
             button21.Size = new Size(96, 48);
             button21.TabIndex = 33;
             button21.Text = "Turn On Magnet 6";
             button21.UseVisualStyleBackColor = false;
+            button21.Click += button21_Click;
             // 
             // button18
             // 
             button18.BackColor = Color.Red;
             button18.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button18.Location = new Point(390, 86);
+            button18.Location = new Point(592, 86);
             button18.Name = "button18";
             button18.Size = new Size(96, 48);
             button18.TabIndex = 32;
             button18.Text = "Turn Off Magnet 9";
             button18.UseVisualStyleBackColor = false;
+            button18.Click += button18_Click;
             // 
             // button19
             // 
             button19.BackColor = Color.Green;
             button19.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button19.Location = new Point(274, 86);
+            button19.Location = new Point(476, 86);
             button19.Name = "button19";
             button19.Size = new Size(96, 48);
             button19.TabIndex = 31;
             button19.Text = "Turn On Magnet 9";
             button19.UseVisualStyleBackColor = false;
+            button19.Click += button19_Click;
             // 
             // button16
             // 
             button16.BackColor = Color.Red;
             button16.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button16.Location = new Point(390, 302);
+            button16.Location = new Point(592, 302);
             button16.Name = "button16";
             button16.Size = new Size(96, 48);
             button16.TabIndex = 30;
             button16.Text = "Turn Off Magnet 5";
             button16.UseVisualStyleBackColor = false;
+            button16.Click += button16_Click;
             // 
             // button17
             // 
             button17.BackColor = Color.Green;
             button17.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button17.Location = new Point(274, 302);
+            button17.Location = new Point(476, 302);
             button17.Name = "button17";
             button17.Size = new Size(96, 48);
             button17.TabIndex = 29;
             button17.Text = "Turn On Magnet 5";
             button17.UseVisualStyleBackColor = false;
+            button17.Click += button17_Click;
             // 
             // button14
             // 
             button14.BackColor = Color.Red;
             button14.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button14.Location = new Point(390, 356);
+            button14.Location = new Point(592, 356);
             button14.Name = "button14";
             button14.Size = new Size(96, 48);
             button14.TabIndex = 28;
             button14.Text = "Turn Off Magnet 4";
             button14.UseVisualStyleBackColor = false;
+            button14.Click += button14_Click;
             // 
             // button15
             // 
             button15.BackColor = Color.Green;
             button15.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button15.Location = new Point(273, 356);
+            button15.Location = new Point(475, 356);
             button15.Name = "button15";
             button15.Size = new Size(96, 48);
             button15.TabIndex = 27;
             button15.Text = "Turn On Magnet 4";
             button15.UseVisualStyleBackColor = false;
+            button15.Click += button15_Click;
             // 
             // button12
             // 
             button12.BackColor = Color.Red;
             button12.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button12.Location = new Point(390, 522);
+            button12.Location = new Point(592, 522);
             button12.Name = "button12";
             button12.Size = new Size(96, 48);
             button12.TabIndex = 26;
@@ -500,16 +526,17 @@ namespace Testing_the_GUI1
             button13.Font = new Font("Microsoft Sans Serif", 9.75F);
             button13.Location = new Point(9, 86);
             button13.Name = "button13";
-            button13.Size = new Size(96, 48);
+            button13.Size = new Size(168, 48);
             button13.TabIndex = 25;
-            button13.Text = "Turn On Stepmotor4";
+            button13.Text = "Pump1 On Suck";
             button13.UseVisualStyleBackColor = false;
+            button13.Click += button13_Click;
             // 
             // button11
             // 
             button11.BackColor = Color.Green;
             button11.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button11.Location = new Point(274, 518);
+            button11.Location = new Point(476, 518);
             button11.Name = "button11";
             button11.Size = new Size(96, 48);
             button11.TabIndex = 23;
@@ -521,12 +548,13 @@ namespace Testing_the_GUI1
             // 
             button10.BackColor = Color.Red;
             button10.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button10.Location = new Point(126, 194);
+            button10.Location = new Point(183, 194);
             button10.Name = "button10";
-            button10.Size = new Size(96, 48);
+            button10.Size = new Size(161, 48);
             button10.TabIndex = 22;
-            button10.Text = "Turn Off Stepmotor2";
+            button10.Text = "Move Stepmotor2 Right";
             button10.UseVisualStyleBackColor = false;
+            button10.Click += button10_Click;
             // 
             // button9
             // 
@@ -534,21 +562,23 @@ namespace Testing_the_GUI1
             button9.Font = new Font("Microsoft Sans Serif", 9.75F);
             button9.Location = new Point(9, 194);
             button9.Name = "button9";
-            button9.Size = new Size(96, 48);
+            button9.Size = new Size(168, 48);
             button9.TabIndex = 21;
-            button9.Text = "Turn On Stepmotor2";
+            button9.Text = "Move Stepmotor2 Left";
             button9.UseVisualStyleBackColor = false;
+            button9.Click += button9_Click;
             // 
             // button8
             // 
             button8.BackColor = Color.Red;
             button8.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button8.Location = new Point(126, 140);
+            button8.Location = new Point(183, 140);
             button8.Name = "button8";
-            button8.Size = new Size(96, 48);
+            button8.Size = new Size(161, 48);
             button8.TabIndex = 20;
-            button8.Text = "Turn Off Stepmotor3";
+            button8.Text = "Pump2 On Push";
             button8.UseVisualStyleBackColor = false;
+            button8.Click += button8_Click;
             // 
             // button7
             // 
@@ -556,21 +586,23 @@ namespace Testing_the_GUI1
             button7.Font = new Font("Microsoft Sans Serif", 9.75F);
             button7.Location = new Point(9, 140);
             button7.Name = "button7";
-            button7.Size = new Size(96, 48);
+            button7.Size = new Size(168, 48);
             button7.TabIndex = 19;
-            button7.Text = "Turn On Stepmotor3";
+            button7.Text = "Pump2 On Suck";
             button7.UseVisualStyleBackColor = false;
+            button7.Click += button7_Click;
             // 
             // button6
             // 
             button6.BackColor = Color.Red;
             button6.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button6.Location = new Point(126, 86);
+            button6.Location = new Point(183, 86);
             button6.Name = "button6";
-            button6.Size = new Size(96, 48);
+            button6.Size = new Size(161, 48);
             button6.TabIndex = 18;
-            button6.Text = "Turn Off Stepmotor4";
+            button6.Text = "Pump1 On Push";
             button6.UseVisualStyleBackColor = false;
+            button6.Click += button6_Click;
             // 
             // labelTemperature2
             // 
@@ -622,7 +654,7 @@ namespace Testing_the_GUI1
             // 
             dropDownMenu2.DropDownStyle = ComboBoxStyle.DropDownList;
             dropDownMenu2.FormattingEnabled = true;
-            dropDownMenu2.Items.AddRange(new object[] { "Step1", "Step2", "Step3", "Step4", "Step5", "Step6", "Step7", "Step8", "Step9", "Step10", "Step11", "Step12", "Step13", "Step14", "Step15", "Step16", "Step17", "Step18", "Step19", "Step20", "Step21", "Step22" });
+            dropDownMenu2.Items.AddRange(new object[] { "Run All Steps", "Step2", "Step3", "Step4", "Step5", "Step6", "Step7", "Step8", "Step9", "Step10", "Step11", "Step12", "Step13", "Step14", "Step15", "Step16", "Step17", "Step18", "Step19", "Step20", "Step21", "Step22", "Step23", "Step24" });
             dropDownMenu2.Location = new Point(173, 26);
             dropDownMenu2.Name = "dropDownMenu2";
             dropDownMenu2.Size = new Size(241, 24);
@@ -721,5 +753,7 @@ namespace Testing_the_GUI1
         private Button button12;
         private Label label7;
         private Label label8;
+        private DateTimePicker dateTimePicker1;
+        private ColorDialog colorDialog1;
     }
 }

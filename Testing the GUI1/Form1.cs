@@ -4,6 +4,7 @@ using System.IO.Ports;
 // Add this to use the SerialPort class
 using System.Windows.Forms;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
+using System.Windows.Forms.DataVisualization.Charting;
 
 // All comments are referring to the code below the comment
 
@@ -15,7 +16,7 @@ namespace Testing_the_GUI1
         public SerialPort serialPort;
         private TemperatureReader temperatureReader;
         private Dictionary<string, Action> stepActions;
-        
+
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Close the serial port when the form is closing.
@@ -24,7 +25,7 @@ namespace Testing_the_GUI1
                 serialPort.Close();
             }
         }
-        
+
 
         // Defines the event handler method
         private void SerialPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -36,23 +37,35 @@ namespace Testing_the_GUI1
             UpdateTemperatureLabels(temperature);
         }
 
+
+
         public Form1()
         {
             InitializeComponent();
-            // Adjust "COM4" as per your Arduino connection
-            serialPort = new SerialPort("COM4", 9600);
+            // Adjust "COM3" as per your Arduino connection
+            serialPort = new SerialPort("COM3", 9600);
             // Initialize the TemperatureReader with this form instance
             temperatureReader = new TemperatureReader(this);
             // Initialize the serial port in TemperatureReader
-            temperatureReader.InitializeSerialPort("COM4");
+            temperatureReader.InitializeSerialPort("COM3");
             //This makes sure we get an updated temptrature in real time
             serialPort.DataReceived += SerialPort_DataReceived;
             dropDownMenu1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             dropDownMenu2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
+            /*button1.MouseDown += button1_MouseDown;
+            button2.MouseUp += button2_MouseUp;*/
             // Close
             this.FormClosing += new FormClosingEventHandler(Form1_FormClosing);
-            serialPort.Open();
-            
+            try
+            {
+                serialPort.Open();
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show($"An error occurred while attempting to open the serial port: {ex.Message}");
+                // Handle the exception (e.g., try a different COM port, retry, or exit the program)
+            }
+
             // Initialize the dictionary with actions for each step.
             // Right now, they all show a message, but you could replace them with actual method calls.
             stepActions = new Dictionary<string, Action>();
@@ -93,22 +106,22 @@ namespace Testing_the_GUI1
 
 
         // Public method to safely update the temperature label on the form
-       /* public void UpdateTemperaturelabelTemperature2(string temperature)
-        {
-            // Check if the update of label's text needs to be done on the UI thread
-            if (labelTemperature2.InvokeRequired)
-            {
-                // If so, use Invoke to ensure the update happens on the UI thread
-                labelTemperature2.Invoke(new Action(() => labelTemperature2.Text = temperature + " °C"));
-            }
-            else
-            {
-                // If not, update the label's text directly
-                labelTemperature2.Text = temperature + " °C";
-            }
-        }*/
+        /* public void UpdateTemperaturelabelTemperature2(string temperature)
+         {
+             // Check if the update of label's text needs to be done on the UI thread
+             if (labelTemperature2.InvokeRequired)
+             {
+                 // If so, use Invoke to ensure the update happens on the UI thread
+                 labelTemperature2.Invoke(new Action(() => labelTemperature2.Text = temperature + " °C"));
+             }
+             else
+             {
+                 // If not, update the label's text directly
+                 labelTemperature2.Text = temperature + " °C";
+             }
+         }*/
 
-        
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -116,7 +129,7 @@ namespace Testing_the_GUI1
             if (serialPort != null && serialPort.IsOpen)
             {
                 // Send a command to the serial port to turn off the step motor
-                serialPort.WriteLine("11");
+                serialPort.WriteLine("MoveUp");
             }
             else
             {
@@ -124,6 +137,30 @@ namespace Testing_the_GUI1
                 MessageBox.Show("Serial port is not open.");
             }
         }
+        /*private void button1_MouseDown(object sender, MouseEventArgs e)
+        {
+            // Sends a  command to move the stepper motor up
+            serialPort.WriteLine("15");
+        }
+
+        private void button1_MouseUp(object sender, MouseEventArgs e)
+        {
+            // Send a stop command to the Arduino
+            serialPort.WriteLine("stop");
+        }
+
+        private void button2_MouseDown(object sender, MouseEventArgs e)
+        {
+            // Send a command to the Arduino to move the motor down
+            serialPort.WriteLine("16");
+        }
+
+        private void button2_MouseUp(object sender, MouseEventArgs e)
+        {
+            // Send a stop command to the Arduino
+            serialPort.WriteLine("stop");
+        }
+        */
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -131,7 +168,7 @@ namespace Testing_the_GUI1
             if (serialPort != null && serialPort.IsOpen)
             {
                 // Send a command to the serial port to turn off the step motor
-                serialPort.WriteLine("12");
+                serialPort.WriteLine("MoveDown");
             }
             else
             {
@@ -141,12 +178,11 @@ namespace Testing_the_GUI1
         }
 
         private void button11_Click(object sender, EventArgs e)
-        {
-            // Similar to button1_Click, but this time to turn on magnet nr 1
+        {// Check if the serial port is open before attempting to write to it
             if (serialPort != null && serialPort.IsOpen)
             {
-                // Send a command to the serial port to turn on the magnet
-                serialPort.WriteLine("13");
+                // Send a command to the serial port to turn off the step motor
+                serialPort.WriteLine("Mag1_ON");
             }
             else
             {
@@ -156,11 +192,11 @@ namespace Testing_the_GUI1
         }
         private void button12_Click(object sender, EventArgs e)
         {
-            
+            // Check if the serial port is open before attempting to write to it
             if (serialPort != null && serialPort.IsOpen)
             {
-                // Send a command to the serial port to turn of the magnet
-                serialPort.WriteLine("mag1OFF");
+                // Send a command to the serial port to turn off the step motor
+                serialPort.WriteLine("Mag1_OFF");
             }
             else
             {
@@ -233,19 +269,39 @@ namespace Testing_the_GUI1
             // This is the button assigned to run the actual setting/program that is selected from the dropdown menu
             if (dropDownMenu2.SelectedItem == null)
             {
-                // Different messages that will show in a messagebox depending on the dropdown menu item
+                // Inform the user that no step has been selected
                 MessageBox.Show("You did not select a step, please select a step");
             }
             else
             {
                 string selectedItem = dropDownMenu2.SelectedItem.ToString();
-                if (stepActions.TryGetValue(selectedItem, out var action))
+                // Check if the serial port is open before attempting to write to it
+                if (serialPort != null && serialPort.IsOpen)
                 {
-                    action.Invoke();
+                    if (selectedItem == "Run All Steps")
+                    {
+                        // Send the special variable "All" through the serial port
+                        serialPort.WriteLine("1");
+                    }
+                    else
+                    {
+                        // Extract the numeric part from the selected item, assuming the format is "StepX"
+                        int stepNumber;
+                        if (int.TryParse(selectedItem.Substring(4), out stepNumber))
+                        {
+                            // Send the step number through the serial port
+                            serialPort.WriteLine(stepNumber.ToString());
+                        }
+                        else
+                        {
+                            MessageBox.Show("Unknown step selected.");
+                        }
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Unknown step selected.");
+                    // If the serial port is not open, inform the user
+                    MessageBox.Show("Serial port is not open.");
                 }
             }
         }
@@ -282,21 +338,41 @@ namespace Testing_the_GUI1
         private void button3_Click_1(object sender, EventArgs e)
         {
             // This is the button assigned to run the actual setting/program that is selected from the dropdown menu
-            if (dropDownMenu1.SelectedItem == null)
+            if (dropDownMenu2.SelectedItem == null)
             {
-                // Different messages that will show in a messagebox depending on the dropdown menu item
+                // Inform the user that no step has been selected
                 MessageBox.Show("You did not select a step, please select a step");
             }
             else
             {
-                string selectedItem = dropDownMenu1.SelectedItem.ToString();
-                if (stepActions.TryGetValue(selectedItem, out var action))
+                string selectedItem = dropDownMenu2.SelectedItem.ToString();
+                // Check if the serial port is open before attempting to write to it
+                if (serialPort != null && serialPort.IsOpen)
                 {
-                    action.Invoke();
+                    if (selectedItem == "Run All Steps")
+                    {
+                        // Send the special variable "All" through the serial port
+                        serialPort.WriteLine("All");
+                    }
+                    else
+                    {
+                        // Extract the numeric part from the selected item, assuming the format is "StepX"
+                        int stepNumber;
+                        if (int.TryParse(selectedItem.Substring(4), out stepNumber))
+                        {
+                            // Send the step number through the serial port
+                            serialPort.WriteLine(stepNumber.ToString());
+                        }
+                        else
+                        {
+                            MessageBox.Show("Unknown step selected.");
+                        }
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Unknown step selected.");
+                    // If the serial port is not open, inform the user
+                    MessageBox.Show("Serial port is not open.");
                 }
             }
         }
@@ -368,102 +444,434 @@ namespace Testing_the_GUI1
             dropDownMenu1.Items.Add("Step20");
             dropDownMenu1.Items.Add("Step21");
             dropDownMenu1.Items.Add("Step22");
+            dropDownMenu1.Items.Add("Step23");
+            dropDownMenu1.Items.Add("Step24");
 
         }
 
-    }
-
-    public class TemperatureReader
-    {
-        // Reference to the serialPort instance
-        private SerialPort serialPort;
-        // Reference to the Form1 instance
-        private Form1 formInstance;
-
-        public TemperatureReader(Form1 form)
+        private void button9_Click(object sender, EventArgs e)
         {
-            formInstance = form;
-        }
-
-        public void InitializeSerialPort(string portName)
-        {
-            // Initialize a new instance of the SerialPort class with the specified port name.
-            serialPort = new SerialPort(portName)
+            // Check if the serial port is open before attempting to write to it
+            if (serialPort != null && serialPort.IsOpen)
             {
-                // Set the baud rate for serial data transmission.
-                BaudRate = 9600,
-                // No parity bit is added to the data packet.
-                Parity = Parity.None,
-                // One stop bit is used to signal the end of a data packet.
-                StopBits = StopBits.One,
-                // The data is sent with 8 data bits.
-                DataBits = 8,
-                // No handshaking protocol is used.
-                Handshake = Handshake.None,
-                // The time-out value for read operations.
-                ReadTimeout = 500,
-                // The time-out value for write operations.
-                WriteTimeout = 500
-            };
-
-            // Try to open the serial port and attach the DataReceived event handler.
-            try
-            {
-                // Attach the event handler method for data received events.
-                serialPort.DataReceived += new SerialDataReceivedEventHandler(SerialPortDataReceived);
-                // Open the serial port for communications.
-                // serialPort.Open();
+                // Send a command to the serial port to turn off the step motor
+                serialPort.WriteLine("MoveLeft");
             }
-            catch (Exception ex) // Catch any exceptions thrown during the opening of the serial port.
+            else
             {
-                // Check if the form's window handle has been created to ensure thread safety when calling BeginInvoke.
-                if (formInstance.IsHandleCreated)
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+
+        }
+
+        public class TemperatureReader
+        {
+            // Reference to the serialPort instance
+            private SerialPort serialPort;
+            // Reference to the Form1 instance
+            private Form1 formInstance;
+
+            public TemperatureReader(Form1 form)
+            {
+                formInstance = form;
+            }
+
+            public void InitializeSerialPort(string portName)
+            {
+                // Initialize a new instance of the SerialPort class with the specified port name.
+                serialPort = new SerialPort(portName)
                 {
-                    // If the handle is created, safely call BeginInvoke on the form's thread.
+                    // Set the baud rate for serial data transmission.
+                    BaudRate = 9600,
+                    // No parity bit is added to the data packet.
+                    Parity = Parity.None,
+                    // One stop bit is used to signal the end of a data packet.
+                    StopBits = StopBits.One,
+                    // The data is sent with 8 data bits.
+                    DataBits = 8,
+                    // No handshaking protocol is used.
+                    Handshake = Handshake.None,
+                    // The time-out value for read operations.
+                    ReadTimeout = 500,
+                    // The time-out value for write operations.
+                    WriteTimeout = 500
+                };
+
+                // Try to open the serial port and attach the DataReceived event handler.
+                try
+                {
+                    // Attach the event handler method for data received events.
+                    serialPort.DataReceived += new SerialDataReceivedEventHandler(SerialPortDataReceived);
+                    // Open the serial port for communications.
+                    // serialPort.Open();
+                }
+                catch (Exception ex) // Catch any exceptions thrown during the opening of the serial port.
+                {
+                    // Check if the form's window handle has been created to ensure thread safety when calling BeginInvoke.
+                    if (formInstance.IsHandleCreated)
+                    {
+                        // If the handle is created, safely call BeginInvoke on the form's thread.
+                        formInstance.BeginInvoke(new Action(() =>
+                        {
+                            // Display a message box with the error message.
+                            MessageBox.Show($"Failed to open serial port '{portName}'. {ex.Message}");
+                        }));
+                    }
+                    else
+                    {
+                        // If the form's handle is not created, we cannot use BeginInvoke.
+                        // Here you should handle the error appropriately, such as logging it or storing the error message for later display.
+                        // For example, log the error message or store it in a variable to show later.
+                    }
+                }
+            }
+
+
+            private void SerialPortDataReceived(object sender, SerialDataReceivedEventArgs e)
+            {
+                try
+                {
+                    // Read the data asynchronously
+                    string data = serialPort.ReadLine();
                     formInstance.BeginInvoke(new Action(() =>
                     {
-                        // Display a message box with the error message.
-                        MessageBox.Show($"Failed to open serial port '{portName}'. {ex.Message}");
+                        // Invoke method to update the GUI
+                        formInstance.UpdateTemperatureLabels(data.Trim());
                     }));
                 }
-                else
+                catch (TimeoutException)
                 {
-                    // If the form's handle is not created, we cannot use BeginInvoke.
-                    // Here you should handle the error appropriately, such as logging it or storing the error message for later display.
-                    // For example, log the error message or store it in a variable to show later.
+                    // Handle the case where the read operation times out
+                    // Possibly retry the read operation or log the timeout
                 }
-            }
-        }
-
-
-        private void SerialPortDataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            try
-            {
-                // Read the data asynchronously
-                string data = serialPort.ReadLine();
-                formInstance.BeginInvoke(new Action(() =>
+                catch (IOException ex)
                 {
-                    // Invoke method to update the GUI
-                    formInstance.UpdateTemperatureLabels(data.Trim());
-                }));
-            }
-            catch (TimeoutException)
-            {
-                // Handle the case where the read operation times out
-                // Possibly retry the read operation or log the timeout
-            }
-            catch (IOException ex)
-            {
-                // Handle I/O exceptions that might occur if the serial port is suddenly disconnected, etc.
-            }
-            // Other specific exceptions related to the SerialPort can be caught here if needed
+                    // Handle I/O exceptions that might occur if the serial port is suddenly disconnected, etc.
+                }
+                // Other specific exceptions related to the SerialPort can be caught here if needed
 
+
+
+            }
 
 
         }
 
+        private void button10_Click(object sender, EventArgs e)
+        {
+            // Check if the serial port is open before attempting to write to it
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                // Send a command to the serial port to turn off the step motor
+                serialPort.WriteLine("MoveRight");
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+        }
 
+        private void button7_Click(object sender, EventArgs e)
+        {
+            // Check if the serial port is open before attempting to write to it
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                // Send a command to the serial port to turn off the step motor
+                serialPort.WriteLine("Pump2_On_Suck");
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            // Check if the serial port is open before attempting to write to it
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                // Send a command to the serial port to turn off the step motor
+                serialPort.WriteLine("Pump2_On_Push");
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            // Check if the serial port is open before attempting to write to it
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                // Send a command to the serial port to turn off the step motor
+                serialPort.WriteLine("Pump1_On_Suck");
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            // Check if the serial port is open before attempting to write to it
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                // Send a command to the serial port to turn off the step motor
+                serialPort.WriteLine("Pump1_On_Push");
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            // Check if the serial port is open before attempting to write to it
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                // Send a command to the serial port to turn oon magnet number 9 
+                serialPort.WriteLine("Mag9_ON");
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            // Check if the serial port is open before attempting to write to it
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                // Send a command to the serial port to turn off magnet number 9
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            // Check if the serial port is open before attempting to write to it
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                serialPort.WriteLine("Mag8_ON");
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            // Check if the serial port is open before attempting to write to it
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                serialPort.WriteLine("Mag8_OFF");
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+            // Check if the serial port is open before attempting to write to it
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                serialPort.WriteLine("Mag7_ON");
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            // Check if the serial port is open before attempting to write to it
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                serialPort.WriteLine("Mag7_OFF");
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            // Check if the serial port is open before attempting to write to it
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                // Send a command to the serial port to turn on magnet number 6
+                serialPort.WriteLine("Mag6_ON");
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            // Check if the serial port is open before attempting to write to it
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                // Send a command to the serial port to turn off magnet number 6
+                serialPort.WriteLine("Mag6_OFF");
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            // Check if the serial port is open before attempting to write to it
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                serialPort.WriteLine("Mag5_ON");
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            // Check if the serial port is open before attempting to write to it
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                serialPort.WriteLine("Mag5_OFF");
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            // Check if the serial port is open before attempting to write to it
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                serialPort.WriteLine("Mag4_ON");
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            // Check if the serial port is open before attempting to write to it
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                serialPort.WriteLine("Mag4_OFF");
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+            // Check if the serial port is open before attempting to write to it
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                serialPort.WriteLine("Mag3_ON");
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+            // Check if the serial port is open before attempting to write to it
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                serialPort.WriteLine("Mag3_OFF");
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+            // Check if the serial port is open before attempting to write to it
+            if (serialPort != null && serialPort.IsOpen)
+            {               
+                serialPort.WriteLine("Mag2_ON");
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+            // Check if the serial port is open before attempting to write to it
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                serialPort.WriteLine("Mag2_OFF");
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+        }
     }
 }
+
+
 

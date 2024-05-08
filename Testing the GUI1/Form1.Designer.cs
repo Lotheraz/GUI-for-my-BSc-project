@@ -45,6 +45,9 @@ namespace Testing_the_GUI1
             label7 = new Label();
             button3 = new Button();
             tabPage2 = new TabPage();
+            button30 = new Button();
+            button31 = new Button();
+            label3 = new Label();
             label8 = new Label();
             button28 = new Button();
             button29 = new Button();
@@ -78,6 +81,10 @@ namespace Testing_the_GUI1
             label5 = new Label();
             button5 = new Button();
             colorDialog1 = new ColorDialog();
+            button33 = new Button();
+            button34 = new Button();
+            button35 = new Button();
+            button32 = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -262,6 +269,13 @@ namespace Testing_the_GUI1
             // tabPage2
             // 
             tabPage2.BackColor = SystemColors.ActiveCaption;
+            tabPage2.Controls.Add(button32);
+            tabPage2.Controls.Add(button35);
+            tabPage2.Controls.Add(button34);
+            tabPage2.Controls.Add(button33);
+            tabPage2.Controls.Add(button30);
+            tabPage2.Controls.Add(button31);
+            tabPage2.Controls.Add(label3);
             tabPage2.Controls.Add(label8);
             tabPage2.Controls.Add(button28);
             tabPage2.Controls.Add(button29);
@@ -305,6 +319,41 @@ namespace Testing_the_GUI1
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Operator Mode";
             // 
+            // button30
+            // 
+            button30.BackColor = Color.Red;
+            button30.Font = new Font("Microsoft Sans Serif", 9.75F);
+            button30.Location = new Point(590, 86);
+            button30.Name = "button30";
+            button30.Size = new Size(96, 48);
+            button30.TabIndex = 46;
+            button30.Text = "Close All Valves";
+            button30.UseVisualStyleBackColor = false;
+            button30.Click += button30_Click;
+            // 
+            // button31
+            // 
+            button31.BackColor = Color.Green;
+            button31.Font = new Font("Microsoft Sans Serif", 9.75F);
+            button31.Location = new Point(474, 86);
+            button31.Name = "button31";
+            button31.Size = new Size(96, 48);
+            button31.TabIndex = 45;
+            button31.Text = "Open All Valves";
+            button31.UseVisualStyleBackColor = false;
+            button31.Click += button31_Click;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = SystemColors.Control;
+            label3.Font = new Font("Microsoft Sans Serif", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Location = new Point(475, 26);
+            label3.Name = "label3";
+            label3.Size = new Size(222, 37);
+            label3.TabIndex = 44;
+            label3.Text = "Valve Control";
+            // 
             // label8
             // 
             label8.AutoSize = true;
@@ -320,7 +369,7 @@ namespace Testing_the_GUI1
             // 
             button28.BackColor = Color.Red;
             button28.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button28.Location = new Point(592, 468);
+            button28.Location = new Point(591, 518);
             button28.Name = "button28";
             button28.Size = new Size(96, 48);
             button28.TabIndex = 42;
@@ -332,7 +381,7 @@ namespace Testing_the_GUI1
             // 
             button29.BackColor = Color.Green;
             button29.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button29.Location = new Point(475, 464);
+            button29.Location = new Point(474, 518);
             button29.Name = "button29";
             button29.Size = new Size(96, 48);
             button29.TabIndex = 41;
@@ -344,7 +393,7 @@ namespace Testing_the_GUI1
             // 
             button26.BackColor = Color.Red;
             button26.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button26.Location = new Point(592, 414);
+            button26.Location = new Point(591, 464);
             button26.Name = "button26";
             button26.Size = new Size(96, 48);
             button26.TabIndex = 40;
@@ -356,7 +405,7 @@ namespace Testing_the_GUI1
             // 
             button27.BackColor = Color.Green;
             button27.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button27.Location = new Point(476, 410);
+            button27.Location = new Point(475, 464);
             button27.Name = "button27";
             button27.Size = new Size(96, 48);
             button27.TabIndex = 39;
@@ -368,7 +417,7 @@ namespace Testing_the_GUI1
             // 
             button24.BackColor = Color.Red;
             button24.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button24.Location = new Point(592, 194);
+            button24.Location = new Point(591, 248);
             button24.Name = "button24";
             button24.Size = new Size(96, 48);
             button24.TabIndex = 38;
@@ -380,7 +429,7 @@ namespace Testing_the_GUI1
             // 
             button25.BackColor = Color.Green;
             button25.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button25.Location = new Point(475, 194);
+            button25.Location = new Point(474, 248);
             button25.Name = "button25";
             button25.Size = new Size(96, 48);
             button25.TabIndex = 37;
@@ -392,7 +441,7 @@ namespace Testing_the_GUI1
             // 
             button22.BackColor = Color.Red;
             button22.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button22.Location = new Point(592, 140);
+            button22.Location = new Point(591, 194);
             button22.Name = "button22";
             button22.Size = new Size(96, 48);
             button22.TabIndex = 36;
@@ -404,7 +453,7 @@ namespace Testing_the_GUI1
             // 
             button23.BackColor = Color.Green;
             button23.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button23.Location = new Point(475, 140);
+            button23.Location = new Point(474, 194);
             button23.Name = "button23";
             button23.Size = new Size(96, 48);
             button23.TabIndex = 35;
@@ -416,7 +465,7 @@ namespace Testing_the_GUI1
             // 
             button20.BackColor = Color.Red;
             button20.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button20.Location = new Point(592, 248);
+            button20.Location = new Point(591, 302);
             button20.Name = "button20";
             button20.Size = new Size(96, 48);
             button20.TabIndex = 34;
@@ -428,7 +477,7 @@ namespace Testing_the_GUI1
             // 
             button21.BackColor = Color.Green;
             button21.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button21.Location = new Point(476, 248);
+            button21.Location = new Point(475, 302);
             button21.Name = "button21";
             button21.Size = new Size(96, 48);
             button21.TabIndex = 33;
@@ -440,7 +489,7 @@ namespace Testing_the_GUI1
             // 
             button18.BackColor = Color.Red;
             button18.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button18.Location = new Point(592, 86);
+            button18.Location = new Point(591, 140);
             button18.Name = "button18";
             button18.Size = new Size(96, 48);
             button18.TabIndex = 32;
@@ -452,7 +501,7 @@ namespace Testing_the_GUI1
             // 
             button19.BackColor = Color.Green;
             button19.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button19.Location = new Point(476, 86);
+            button19.Location = new Point(475, 140);
             button19.Name = "button19";
             button19.Size = new Size(96, 48);
             button19.TabIndex = 31;
@@ -464,7 +513,7 @@ namespace Testing_the_GUI1
             // 
             button16.BackColor = Color.Red;
             button16.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button16.Location = new Point(592, 302);
+            button16.Location = new Point(591, 356);
             button16.Name = "button16";
             button16.Size = new Size(96, 48);
             button16.TabIndex = 30;
@@ -476,7 +525,7 @@ namespace Testing_the_GUI1
             // 
             button17.BackColor = Color.Green;
             button17.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button17.Location = new Point(476, 302);
+            button17.Location = new Point(475, 356);
             button17.Name = "button17";
             button17.Size = new Size(96, 48);
             button17.TabIndex = 29;
@@ -488,7 +537,7 @@ namespace Testing_the_GUI1
             // 
             button14.BackColor = Color.Red;
             button14.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button14.Location = new Point(592, 356);
+            button14.Location = new Point(591, 410);
             button14.Name = "button14";
             button14.Size = new Size(96, 48);
             button14.TabIndex = 28;
@@ -500,7 +549,7 @@ namespace Testing_the_GUI1
             // 
             button15.BackColor = Color.Green;
             button15.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button15.Location = new Point(475, 356);
+            button15.Location = new Point(474, 410);
             button15.Name = "button15";
             button15.Size = new Size(96, 48);
             button15.TabIndex = 27;
@@ -512,7 +561,7 @@ namespace Testing_the_GUI1
             // 
             button12.BackColor = Color.Red;
             button12.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button12.Location = new Point(592, 522);
+            button12.Location = new Point(591, 572);
             button12.Name = "button12";
             button12.Size = new Size(96, 48);
             button12.TabIndex = 26;
@@ -536,7 +585,7 @@ namespace Testing_the_GUI1
             // 
             button11.BackColor = Color.Green;
             button11.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button11.Location = new Point(476, 518);
+            button11.Location = new Point(475, 572);
             button11.Name = "button11";
             button11.Size = new Size(96, 48);
             button11.TabIndex = 23;
@@ -682,6 +731,50 @@ namespace Testing_the_GUI1
             button5.UseVisualStyleBackColor = true;
             button5.Click += button3_Click;
             // 
+            // button33
+            // 
+            button33.BackColor = Color.Yellow;
+            button33.Font = new Font("Microsoft Sans Serif", 9.75F);
+            button33.Location = new Point(350, 86);
+            button33.Name = "button33";
+            button33.Size = new Size(96, 48);
+            button33.TabIndex = 48;
+            button33.Text = "Reset Pump1";
+            button33.UseVisualStyleBackColor = false;
+            // 
+            // button34
+            // 
+            button34.BackColor = Color.Yellow;
+            button34.Font = new Font("Microsoft Sans Serif", 9.75F);
+            button34.Location = new Point(350, 194);
+            button34.Name = "button34";
+            button34.Size = new Size(96, 48);
+            button34.TabIndex = 50;
+            button34.Text = "Reset Stepmotor2";
+            button34.UseVisualStyleBackColor = false;
+            // 
+            // button35
+            // 
+            button35.BackColor = Color.Yellow;
+            button35.Font = new Font("Microsoft Sans Serif", 9.75F);
+            button35.Location = new Point(350, 140);
+            button35.Name = "button35";
+            button35.Size = new Size(96, 48);
+            button35.TabIndex = 51;
+            button35.Text = "Reset Pump2";
+            button35.UseVisualStyleBackColor = false;
+            // 
+            // button32
+            // 
+            button32.BackColor = Color.Yellow;
+            button32.Font = new Font("Microsoft Sans Serif", 9.75F);
+            button32.Location = new Point(350, 248);
+            button32.Name = "button32";
+            button32.Size = new Size(96, 48);
+            button32.TabIndex = 52;
+            button32.Text = "Reset Stepmotor1";
+            button32.UseVisualStyleBackColor = false;
+            // 
             // Form1
             // 
             AutoScaleMode = AutoScaleMode.None;
@@ -755,5 +848,12 @@ namespace Testing_the_GUI1
         private Label label8;
         private DateTimePicker dateTimePicker1;
         private ColorDialog colorDialog1;
+        private Label label3;
+        private Button button30;
+        private Button button31;
+        private Button button33;
+        private Button button32;
+        private Button button35;
+        private Button button34;
     }
 }

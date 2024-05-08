@@ -75,6 +75,8 @@ namespace Testing_the_GUI1
                 stepActions[stepName] = () => MessageBox.Show($"Running your selected program: {stepName}");
             }
 
+
+
         }
         public void UpdateTemperatureLabels(string temperature)
         {
@@ -103,7 +105,18 @@ namespace Testing_the_GUI1
                 updateAction();
             }
         }
-
+        private void SendCommandWithNewline(string command)
+        {
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                serialPort.WriteLine(command);
+                serialPort.WriteLine("\n"); // Ensure newline is sent after the command
+            }
+            else
+            {
+                MessageBox.Show("Serial port is not open.");
+            }
+        }
 
         // Public method to safely update the temperature label on the form
         /* public void UpdateTemperaturelabelTemperature2(string temperature)
@@ -125,11 +138,14 @@ namespace Testing_the_GUI1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //SendCommandWithNewline("MoveUp");
+
             // Check if the serial port is open before attempting to write to it
             if (serialPort != null && serialPort.IsOpen)
             {
                 // Send a command to the serial port to turn off the step motor
                 serialPort.WriteLine("MoveUp");
+                serialPort.WriteLine("/n");
             }
             else
             {
@@ -137,38 +153,16 @@ namespace Testing_the_GUI1
                 MessageBox.Show("Serial port is not open.");
             }
         }
-        /*private void button1_MouseDown(object sender, MouseEventArgs e)
-        {
-            // Sends a  command to move the stepper motor up
-            serialPort.WriteLine("15");
-        }
 
-        private void button1_MouseUp(object sender, MouseEventArgs e)
-        {
-            // Send a stop command to the Arduino
-            serialPort.WriteLine("stop");
-        }
-
-        private void button2_MouseDown(object sender, MouseEventArgs e)
-        {
-            // Send a command to the Arduino to move the motor down
-            serialPort.WriteLine("16");
-        }
-
-        private void button2_MouseUp(object sender, MouseEventArgs e)
-        {
-            // Send a stop command to the Arduino
-            serialPort.WriteLine("stop");
-        }
-        */
 
         private void button2_Click(object sender, EventArgs e)
         {
-            // Similar to button1_Click, but this time to turn off the step motor
+            //SendCommandWithNewline("MoveDown");
             if (serialPort != null && serialPort.IsOpen)
             {
                 // Send a command to the serial port to turn off the step motor
                 serialPort.WriteLine("MoveDown");
+                serialPort.WriteLine("/n");
             }
             else
             {
@@ -177,19 +171,7 @@ namespace Testing_the_GUI1
             }
         }
 
-        private void button11_Click(object sender, EventArgs e)
-        {// Check if the serial port is open before attempting to write to it
-            if (serialPort != null && serialPort.IsOpen)
-            {
-                // Send a command to the serial port to turn off the step motor
-                serialPort.WriteLine("Mag1_ON");
-            }
-            else
-            {
-                // If the serial port is not open, inform the user
-                MessageBox.Show("Serial port is not open.");
-            }
-        }
+
         private void button12_Click(object sender, EventArgs e)
         {
             // Check if the serial port is open before attempting to write to it
@@ -213,35 +195,7 @@ namespace Testing_the_GUI1
             OpenFile(filePath);
         }
 
-        /*private void button4_Click(object sender, EventArgs e)
-        {
-            // This is the button assigned to run the actual setting/program that is selected from the dropdown menu
 
-            if (dropDownMenu2.SelectedItem == null)
-            {   // Different messages that will show in a messagebox depending on the dropdown menu item
-                MessageBox.Show("You did not select a step, please select a step");
-            }
-            else
-            {
-                string selectedItem = dropDownMenu2.SelectedItem.ToString();
-                if (selectedItem == "Step1")
-                {
-                    MessageBox.Show("Running your selected program: Step1");
-                }
-                else if (selectedItem == "Step2")
-                {
-                    MessageBox.Show("Running your selected program: Step2");
-                }
-                else if (selectedItem == "Step3")
-                {
-                    MessageBox.Show("Running your selected program: Step3");
-                }
-                else if (selectedItem == "Step4")
-                {
-                    MessageBox.Show("Running your selected program: Step4");
-                }
-            }
-        }*/
 
         private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
         {
@@ -282,6 +236,9 @@ namespace Testing_the_GUI1
                     {
                         // Send the special variable "All" through the serial port
                         serialPort.WriteLine("1");
+                        serialPort.WriteLine("/n");
+
+
                     }
                     else
                     {
@@ -291,6 +248,8 @@ namespace Testing_the_GUI1
                         {
                             // Send the step number through the serial port
                             serialPort.WriteLine(stepNumber.ToString());
+                            serialPort.WriteLine("/n");
+
                         }
                         else
                         {
@@ -353,6 +312,7 @@ namespace Testing_the_GUI1
                     {
                         // Send the special variable "All" through the serial port
                         serialPort.WriteLine("All");
+                        serialPort.WriteLine("/n");
                     }
                     else
                     {
@@ -362,6 +322,7 @@ namespace Testing_the_GUI1
                         {
                             // Send the step number through the serial port
                             serialPort.WriteLine(stepNumber.ToString());
+                            serialPort.WriteLine("/n)");
                         }
                         else
                         {
@@ -444,23 +405,24 @@ namespace Testing_the_GUI1
             dropDownMenu1.Items.Add("Step20");
             dropDownMenu1.Items.Add("Step21");
             dropDownMenu1.Items.Add("Step22");
-            dropDownMenu1.Items.Add("Step23");
-            dropDownMenu1.Items.Add("Step24");
+
 
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            // Check if the serial port is open before attempting to write to it
-            if (serialPort != null && serialPort.IsOpen)
-            {
-                // Send a command to the serial port to turn off the step motor
-                serialPort.WriteLine("MoveLeft");
-            }
-            else
-            {
-                // If the serial port is not open, inform the user
-                MessageBox.Show("Serial port is not open.");
+            {// Check if the serial port is open before attempting to write to it
+                if (serialPort != null && serialPort.IsOpen)
+                {
+                    // Send a command to the serial port to turn off the step motor
+                    serialPort.WriteLine("MoveLeft");
+                    serialPort.WriteLine("/n");
+                }
+                else
+                {
+                    // If the serial port is not open, inform the user
+                    MessageBox.Show("Serial port is not open.");
+                }
             }
 
         }
@@ -559,12 +521,12 @@ namespace Testing_the_GUI1
         }
 
         private void button10_Click(object sender, EventArgs e)
-        {
-            // Check if the serial port is open before attempting to write to it
+        {// Check if the serial port is open before attempting to write to it
             if (serialPort != null && serialPort.IsOpen)
             {
                 // Send a command to the serial port to turn off the step motor
                 serialPort.WriteLine("MoveRight");
+                serialPort.WriteLine("/n");
             }
             else
             {
@@ -580,6 +542,7 @@ namespace Testing_the_GUI1
             {
                 // Send a command to the serial port to turn off the step motor
                 serialPort.WriteLine("Pump2_On_Suck");
+                serialPort.WriteLine("/n");
             }
             else
             {
@@ -595,6 +558,7 @@ namespace Testing_the_GUI1
             {
                 // Send a command to the serial port to turn off the step motor
                 serialPort.WriteLine("Pump2_On_Push");
+                serialPort.WriteLine("/n");
             }
             else
             {
@@ -610,6 +574,7 @@ namespace Testing_the_GUI1
             {
                 // Send a command to the serial port to turn off the step motor
                 serialPort.WriteLine("Pump1_On_Suck");
+                serialPort.WriteLine("/n");
             }
             else
             {
@@ -625,6 +590,7 @@ namespace Testing_the_GUI1
             {
                 // Send a command to the serial port to turn off the step motor
                 serialPort.WriteLine("Pump1_On_Push");
+                serialPort.WriteLine("/n");
             }
             else
             {
@@ -640,6 +606,7 @@ namespace Testing_the_GUI1
             {
                 // Send a command to the serial port to turn oon magnet number 9 
                 serialPort.WriteLine("Mag9_ON");
+                serialPort.WriteLine("/n");
             }
             else
             {
@@ -655,6 +622,8 @@ namespace Testing_the_GUI1
             if (serialPort != null && serialPort.IsOpen)
             {
                 // Send a command to the serial port to turn off magnet number 9
+                serialPort.WriteLine("Mag9_OFF");
+                serialPort.WriteLine("/n");
             }
             else
             {
@@ -670,6 +639,7 @@ namespace Testing_the_GUI1
             if (serialPort != null && serialPort.IsOpen)
             {
                 serialPort.WriteLine("Mag8_ON");
+                serialPort.WriteLine("/n");
             }
             else
             {
@@ -685,6 +655,7 @@ namespace Testing_the_GUI1
             if (serialPort != null && serialPort.IsOpen)
             {
                 serialPort.WriteLine("Mag8_OFF");
+                serialPort.WriteLine("/n");
             }
             else
             {
@@ -700,6 +671,7 @@ namespace Testing_the_GUI1
             if (serialPort != null && serialPort.IsOpen)
             {
                 serialPort.WriteLine("Mag7_ON");
+                serialPort.WriteLine("/n");
             }
             else
             {
@@ -715,6 +687,7 @@ namespace Testing_the_GUI1
             if (serialPort != null && serialPort.IsOpen)
             {
                 serialPort.WriteLine("Mag7_OFF");
+                serialPort.WriteLine("/n");
             }
             else
             {
@@ -731,6 +704,7 @@ namespace Testing_the_GUI1
             {
                 // Send a command to the serial port to turn on magnet number 6
                 serialPort.WriteLine("Mag6_ON");
+                serialPort.WriteLine("/n");
             }
             else
             {
@@ -747,6 +721,7 @@ namespace Testing_the_GUI1
             {
                 // Send a command to the serial port to turn off magnet number 6
                 serialPort.WriteLine("Mag6_OFF");
+                serialPort.WriteLine("/n");
             }
             else
             {
@@ -762,6 +737,7 @@ namespace Testing_the_GUI1
             if (serialPort != null && serialPort.IsOpen)
             {
                 serialPort.WriteLine("Mag5_ON");
+                serialPort.WriteLine("/n");
             }
             else
             {
@@ -777,6 +753,7 @@ namespace Testing_the_GUI1
             if (serialPort != null && serialPort.IsOpen)
             {
                 serialPort.WriteLine("Mag5_OFF");
+                serialPort.WriteLine("/n");
             }
             else
             {
@@ -792,6 +769,7 @@ namespace Testing_the_GUI1
             if (serialPort != null && serialPort.IsOpen)
             {
                 serialPort.WriteLine("Mag4_ON");
+                serialPort.WriteLine("/n");
             }
             else
             {
@@ -807,6 +785,7 @@ namespace Testing_the_GUI1
             if (serialPort != null && serialPort.IsOpen)
             {
                 serialPort.WriteLine("Mag4_OFF");
+                serialPort.WriteLine("/n");
             }
             else
             {
@@ -821,6 +800,7 @@ namespace Testing_the_GUI1
             if (serialPort != null && serialPort.IsOpen)
             {
                 serialPort.WriteLine("Mag3_ON");
+                serialPort.WriteLine("/n");
             }
             else
             {
@@ -835,6 +815,7 @@ namespace Testing_the_GUI1
             if (serialPort != null && serialPort.IsOpen)
             {
                 serialPort.WriteLine("Mag3_OFF");
+                serialPort.WriteLine("/n");
             }
             else
             {
@@ -847,8 +828,9 @@ namespace Testing_the_GUI1
         {
             // Check if the serial port is open before attempting to write to it
             if (serialPort != null && serialPort.IsOpen)
-            {               
+            {
                 serialPort.WriteLine("Mag2_ON");
+                serialPort.WriteLine("/n");
             }
             else
             {
@@ -863,6 +845,52 @@ namespace Testing_the_GUI1
             if (serialPort != null && serialPort.IsOpen)
             {
                 serialPort.WriteLine("Mag2_OFF");
+                serialPort.WriteLine("/n");
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {// Check if the serial port is open before attempting to write to it
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                // Send a command to the serial port to turn off the step motor
+                serialPort.WriteLine("Mag1_ON");
+                serialPort.WriteLine("/n");
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                // Send a command to the serial port to turn on all the magnets, in turn opening all the valves
+                serialPort.WriteLine("Open_All_Valves");
+                serialPort.WriteLine("/n");
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+        }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+            if (serialPort != null && serialPort.IsOpen)
+            {
+                // Send a command to the serial port to turn on all the magnets, in turn opening all the valves
+                serialPort.WriteLine("Close_All_Valves");
+                serialPort.WriteLine("/n");
             }
             else
             {

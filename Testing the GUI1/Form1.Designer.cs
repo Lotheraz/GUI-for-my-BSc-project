@@ -41,10 +41,17 @@ namespace Testing_the_GUI1
             labelTemperature1 = new Label();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            label9 = new Label();
+            button36 = new Button();
             dateTimePicker1 = new DateTimePicker();
             label7 = new Label();
             button3 = new Button();
             tabPage2 = new TabPage();
+            label10 = new Label();
+            button37 = new Button();
+            button32 = new Button();
+            button35 = new Button();
+            button34 = new Button();
             button30 = new Button();
             button31 = new Button();
             label3 = new Label();
@@ -81,10 +88,6 @@ namespace Testing_the_GUI1
             label5 = new Label();
             button5 = new Button();
             colorDialog1 = new ColorDialog();
-            button33 = new Button();
-            button34 = new Button();
-            button35 = new Button();
-            button32 = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -220,6 +223,8 @@ namespace Testing_the_GUI1
             // tabPage1
             // 
             tabPage1.BackColor = Color.CornflowerBlue;
+            tabPage1.Controls.Add(label9);
+            tabPage1.Controls.Add(button36);
             tabPage1.Controls.Add(dateTimePicker1);
             tabPage1.Controls.Add(label7);
             tabPage1.Controls.Add(button3);
@@ -236,6 +241,26 @@ namespace Testing_the_GUI1
             tabPage1.Size = new Size(1404, 806);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "User Mode";
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(1084, 60);
+            label9.Name = "label9";
+            label9.Size = new Size(32, 26);
+            label9.TabIndex = 17;
+            label9.Text = "??";
+            // 
+            // button36
+            // 
+            button36.BackColor = Color.Red;
+            button36.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button36.Location = new Point(1228, 549);
+            button36.Name = "button36";
+            button36.Size = new Size(141, 72);
+            button36.TabIndex = 16;
+            button36.Text = "Abort Step Program";
+            button36.UseVisualStyleBackColor = false;
             // 
             // dateTimePicker1
             // 
@@ -269,10 +294,11 @@ namespace Testing_the_GUI1
             // tabPage2
             // 
             tabPage2.BackColor = SystemColors.ActiveCaption;
+            tabPage2.Controls.Add(label10);
+            tabPage2.Controls.Add(button37);
             tabPage2.Controls.Add(button32);
             tabPage2.Controls.Add(button35);
             tabPage2.Controls.Add(button34);
-            tabPage2.Controls.Add(button33);
             tabPage2.Controls.Add(button30);
             tabPage2.Controls.Add(button31);
             tabPage2.Controls.Add(label3);
@@ -318,6 +344,62 @@ namespace Testing_the_GUI1
             tabPage2.Size = new Size(1404, 806);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Operator Mode";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(1093, 77);
+            label10.Name = "label10";
+            label10.Size = new Size(51, 16);
+            label10.TabIndex = 54;
+            label10.Text = "label10";
+            // 
+            // button37
+            // 
+            button37.BackColor = Color.Red;
+            button37.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button37.Location = new Point(1228, 548);
+            button37.Name = "button37";
+            button37.Size = new Size(141, 72);
+            button37.TabIndex = 53;
+            button37.Text = "Abort Step Program";
+            button37.UseVisualStyleBackColor = false;
+            // 
+            // button32
+            // 
+            button32.BackColor = Color.Yellow;
+            button32.Font = new Font("Microsoft Sans Serif", 9.75F);
+            button32.Location = new Point(350, 248);
+            button32.Name = "button32";
+            button32.Size = new Size(96, 48);
+            button32.TabIndex = 52;
+            button32.Text = "Reset Stepmotor1";
+            button32.UseVisualStyleBackColor = false;
+            button32.Click += button32_Click;
+            // 
+            // button35
+            // 
+            button35.BackColor = Color.Yellow;
+            button35.Font = new Font("Microsoft Sans Serif", 9.75F);
+            button35.Location = new Point(350, 86);
+            button35.Name = "button35";
+            button35.Size = new Size(96, 102);
+            button35.TabIndex = 51;
+            button35.Text = "Reset Pump 1 and Pump 2";
+            button35.UseVisualStyleBackColor = false;
+            button35.Click += button35_Click;
+            // 
+            // button34
+            // 
+            button34.BackColor = Color.Yellow;
+            button34.Font = new Font("Microsoft Sans Serif", 9.75F);
+            button34.Location = new Point(350, 194);
+            button34.Name = "button34";
+            button34.Size = new Size(96, 48);
+            button34.TabIndex = 50;
+            button34.Text = "Reset Stepmotor2";
+            button34.UseVisualStyleBackColor = false;
+            button34.Click += button34_Click;
             // 
             // button30
             // 
@@ -731,50 +813,6 @@ namespace Testing_the_GUI1
             button5.UseVisualStyleBackColor = true;
             button5.Click += button3_Click;
             // 
-            // button33
-            // 
-            button33.BackColor = Color.Yellow;
-            button33.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button33.Location = new Point(350, 86);
-            button33.Name = "button33";
-            button33.Size = new Size(96, 48);
-            button33.TabIndex = 48;
-            button33.Text = "Reset Pump1";
-            button33.UseVisualStyleBackColor = false;
-            // 
-            // button34
-            // 
-            button34.BackColor = Color.Yellow;
-            button34.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button34.Location = new Point(350, 194);
-            button34.Name = "button34";
-            button34.Size = new Size(96, 48);
-            button34.TabIndex = 50;
-            button34.Text = "Reset Stepmotor2";
-            button34.UseVisualStyleBackColor = false;
-            // 
-            // button35
-            // 
-            button35.BackColor = Color.Yellow;
-            button35.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button35.Location = new Point(350, 140);
-            button35.Name = "button35";
-            button35.Size = new Size(96, 48);
-            button35.TabIndex = 51;
-            button35.Text = "Reset Pump2";
-            button35.UseVisualStyleBackColor = false;
-            // 
-            // button32
-            // 
-            button32.BackColor = Color.Yellow;
-            button32.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button32.Location = new Point(350, 248);
-            button32.Name = "button32";
-            button32.Size = new Size(96, 48);
-            button32.TabIndex = 52;
-            button32.Text = "Reset Stepmotor1";
-            button32.UseVisualStyleBackColor = false;
-            // 
             // Form1
             // 
             AutoScaleMode = AutoScaleMode.None;
@@ -851,9 +889,12 @@ namespace Testing_the_GUI1
         private Label label3;
         private Button button30;
         private Button button31;
-        private Button button33;
         private Button button32;
         private Button button35;
         private Button button34;
+        private Button button36;
+        private Button button37;
+        private Label label9;
+        private Label label10;
     }
 }

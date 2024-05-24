@@ -297,22 +297,24 @@ namespace Testing_the_GUI1
         private void button3_Click_1(object sender, EventArgs e)
         {
             // This is the button assigned to run the actual setting/program that is selected from the dropdown menu
-            if (dropDownMenu2.SelectedItem == null)
+            if (dropDownMenu1.SelectedItem == null)
             {
                 // Inform the user that no step has been selected
                 MessageBox.Show("You did not select a step, please select a step");
             }
             else
             {
-                string selectedItem = dropDownMenu2.SelectedItem.ToString();
+                string selectedItem = dropDownMenu1.SelectedItem.ToString();
                 // Check if the serial port is open before attempting to write to it
                 if (serialPort != null && serialPort.IsOpen)
                 {
                     if (selectedItem == "Run All Steps")
                     {
                         // Send the special variable "All" through the serial port
-                        serialPort.WriteLine("All");
+                        serialPort.WriteLine("1");
                         serialPort.WriteLine("/n");
+
+
                     }
                     else
                     {
@@ -322,7 +324,8 @@ namespace Testing_the_GUI1
                         {
                             // Send the step number through the serial port
                             serialPort.WriteLine(stepNumber.ToString());
-                            serialPort.WriteLine("/n)");
+                            serialPort.WriteLine("/n");
+
                         }
                         else
                         {
@@ -896,6 +899,72 @@ namespace Testing_the_GUI1
             {
                 // If the serial port is not open, inform the user
                 MessageBox.Show("Serial port is not open.");
+            }
+        }
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+            if (serialPort != null && serialPort.IsOpen)
+            {
+
+                serialPort.WriteLine("Reset_Pump1");
+                serialPort.WriteLine("/n");
+            }
+            else
+            {
+                // If the serial port is not open, inform the user
+                MessageBox.Show("Serial port is not open.");
+            }
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+            {
+                if (serialPort != null && serialPort.IsOpen)
+                {
+
+                    serialPort.WriteLine("Reset_Pumps");
+                    serialPort.WriteLine("/n");
+                }
+                else
+                {
+                    // If the serial port is not open, inform the user
+                    MessageBox.Show("Serial port is not open.");
+                }
+            }
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+            {
+                if (serialPort != null && serialPort.IsOpen)
+                {
+
+                    serialPort.WriteLine("Reset_Motor2");
+                    serialPort.WriteLine("/n");
+                }
+                else
+                {
+                    // If the serial port is not open, inform the user
+                    MessageBox.Show("Serial port is not open.");
+                }
+            }
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+            {
+                if (serialPort != null && serialPort.IsOpen)
+                {
+
+                    serialPort.WriteLine("Reset_Motor1");
+                    serialPort.WriteLine("/n");
+                }
+                else
+                {
+                    // If the serial port is not open, inform the user
+                    MessageBox.Show("Serial port is not open.");
+                }
             }
         }
     }

@@ -203,9 +203,8 @@ namespace Testing_the_GUI1
             labelTemperature1.ForeColor = Color.Red;
             labelTemperature1.Location = new Point(639, 723);
             labelTemperature1.Name = "labelTemperature1";
-            labelTemperature1.Size = new Size(29, 37);
+            labelTemperature1.Size = new Size(0, 37);
             labelTemperature1.TabIndex = 11;
-            labelTemperature1.Text = "?";
             // 
             // tabControl1
             // 
@@ -244,12 +243,11 @@ namespace Testing_the_GUI1
             // 
             // label9
             // 
-            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI Emoji", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label9.Location = new Point(1084, 60);
             label9.Name = "label9";
-            label9.Size = new Size(32, 26);
+            label9.Size = new Size(293, 30);
             label9.TabIndex = 17;
-            label9.Text = "??";
             // 
             // button36
             // 
@@ -347,12 +345,11 @@ namespace Testing_the_GUI1
             // 
             // label10
             // 
-            label10.AutoSize = true;
+            label10.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label10.Location = new Point(1093, 77);
             label10.Name = "label10";
-            label10.Size = new Size(51, 16);
+            label10.Size = new Size(293, 30);
             label10.TabIndex = 54;
-            label10.Text = "label10";
             // 
             // button37
             // 
@@ -743,9 +740,8 @@ namespace Testing_the_GUI1
             labelTemperature2.ForeColor = Color.Red;
             labelTemperature2.Location = new Point(639, 723);
             labelTemperature2.Name = "labelTemperature2";
-            labelTemperature2.Size = new Size(29, 37);
+            labelTemperature2.Size = new Size(0, 37);
             labelTemperature2.TabIndex = 14;
-            labelTemperature2.Text = "?";
             // 
             // selectedProgram2
             // 

@@ -85,7 +85,7 @@ namespace Testing_the_GUI1
         {
             Action updateAction = () =>
             {
-                // Assuming labelTemperature1 and labelTemperature2 are the label controls
+                // labelTemperature1 and labelTemperature2 are the label for temprature display
                 labelTemperature1.Text = temperature + " °C";
                 labelTemperature2.Text = temperature + " °C";
             };
@@ -107,7 +107,7 @@ namespace Testing_the_GUI1
         {
             Action updateAction = () =>
             {
-                // Assuming label9 and label10 are the label controls for status updates
+                // label9 and label10 are the label controls for status updates
                 label9.Text = message;
                 label10.Text = message;
             };
@@ -848,6 +848,37 @@ namespace Testing_the_GUI1
                     // Handle I/O exceptions that might occur if the serial port is suddenly disconnected, etc.
                 }
                 // Other specific exceptions related to the SerialPort can be caught here if needed
+            }
+        }
+        // These next two buttons are for sending the "abort" variable, they halt all current actions and stop
+        // Further step actions until a new action is invoked
+        private void button36_Click(object sender, EventArgs e)
+        {
+            {
+                if (serialPort != null && serialPort.IsOpen)
+                {
+                    serialPort.WriteLine("Abort");
+                    serialPort.WriteLine("/n");
+                }
+                else
+                {
+                    MessageBox.Show("Serial port is not open.");
+                }
+            }
+        }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+            {
+                if (serialPort != null && serialPort.IsOpen)
+                {
+                    serialPort.WriteLine("Abort");
+                    serialPort.WriteLine("/n");
+                }
+                else
+                {
+                    MessageBox.Show("Serial port is not open.");
+                }
             }
         }
     }

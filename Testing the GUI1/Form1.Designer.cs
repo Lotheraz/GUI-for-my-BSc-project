@@ -28,6 +28,7 @@ namespace Testing_the_GUI1
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             button1 = new Button();
             button2 = new Button();
             button4 = new Button();
@@ -47,6 +48,7 @@ namespace Testing_the_GUI1
             label7 = new Label();
             button3 = new Button();
             tabPage2 = new TabPage();
+            dateTimePicker2 = new DateTimePicker();
             label10 = new Label();
             button37 = new Button();
             button32 = new Button();
@@ -88,6 +90,8 @@ namespace Testing_the_GUI1
             label5 = new Label();
             button5 = new Button();
             colorDialog1 = new ColorDialog();
+            timer1 = new System.Windows.Forms.Timer(components);
+            timer2 = new System.Windows.Forms.Timer(components);
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -101,7 +105,7 @@ namespace Testing_the_GUI1
             button1.Name = "button1";
             button1.Size = new Size(168, 48);
             button1.TabIndex = 0;
-            button1.Text = "Move Stepmotor1 Up";
+            button1.Text = "Move Stepmotor 2 Up";
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
@@ -113,7 +117,7 @@ namespace Testing_the_GUI1
             button2.Name = "button2";
             button2.Size = new Size(161, 48);
             button2.TabIndex = 1;
-            button2.Text = "Move Stepmotor1 Down";
+            button2.Text = "Move Stepmotor 2 Down";
             button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click;
             // 
@@ -244,9 +248,9 @@ namespace Testing_the_GUI1
             // label9
             // 
             label9.Font = new Font("Segoe UI Emoji", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label9.Location = new Point(1084, 60);
+            label9.Location = new Point(937, 77);
             label9.Name = "label9";
-            label9.Size = new Size(293, 30);
+            label9.Size = new Size(449, 30);
             label9.TabIndex = 17;
             // 
             // button36
@@ -259,6 +263,7 @@ namespace Testing_the_GUI1
             button36.TabIndex = 16;
             button36.Text = "Abort Step Program";
             button36.UseVisualStyleBackColor = false;
+            button36.Click += button36_Click;
             // 
             // dateTimePicker1
             // 
@@ -292,6 +297,7 @@ namespace Testing_the_GUI1
             // tabPage2
             // 
             tabPage2.BackColor = SystemColors.ActiveCaption;
+            tabPage2.Controls.Add(dateTimePicker2);
             tabPage2.Controls.Add(label10);
             tabPage2.Controls.Add(button37);
             tabPage2.Controls.Add(button32);
@@ -341,14 +347,23 @@ namespace Testing_the_GUI1
             tabPage2.Padding = new Padding(3);
             tabPage2.Size = new Size(1404, 806);
             tabPage2.TabIndex = 1;
-            tabPage2.Text = "Operator Mode";
+            tabPage2.Text = "Manager Mode";
+            // 
+            // dateTimePicker2
+            // 
+            dateTimePicker2.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dateTimePicker2.Location = new Point(11, 761);
+            dateTimePicker2.Name = "dateTimePicker2";
+            dateTimePicker2.RightToLeftLayout = true;
+            dateTimePicker2.Size = new Size(365, 29);
+            dateTimePicker2.TabIndex = 55;
             // 
             // label10
             // 
             label10.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label10.Location = new Point(1093, 77);
+            label10.Location = new Point(937, 77);
             label10.Name = "label10";
-            label10.Size = new Size(293, 30);
+            label10.Size = new Size(449, 30);
             label10.TabIndex = 54;
             // 
             // button37
@@ -361,6 +376,7 @@ namespace Testing_the_GUI1
             button37.TabIndex = 53;
             button37.Text = "Abort Step Program";
             button37.UseVisualStyleBackColor = false;
+            button37.Click += button37_Click;
             // 
             // button32
             // 
@@ -370,7 +386,7 @@ namespace Testing_the_GUI1
             button32.Name = "button32";
             button32.Size = new Size(96, 48);
             button32.TabIndex = 52;
-            button32.Text = "Reset Stepmotor1";
+            button32.Text = "Reset Stepmotor 2";
             button32.UseVisualStyleBackColor = false;
             button32.Click += button32_Click;
             // 
@@ -394,7 +410,7 @@ namespace Testing_the_GUI1
             button34.Name = "button34";
             button34.Size = new Size(96, 48);
             button34.TabIndex = 50;
-            button34.Text = "Reset Stepmotor2";
+            button34.Text = "Reset Stepmotor 4";
             button34.UseVisualStyleBackColor = false;
             button34.Click += button34_Click;
             // 
@@ -442,7 +458,7 @@ namespace Testing_the_GUI1
             label8.Name = "label8";
             label8.Size = new Size(239, 24);
             label8.TabIndex = 43;
-            label8.Text = "Operator Mode Selected";
+            label8.Text = "Manager Mode Selected";
             // 
             // button28
             // 
@@ -652,7 +668,7 @@ namespace Testing_the_GUI1
             // 
             button13.BackColor = Color.Green;
             button13.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button13.Location = new Point(9, 86);
+            button13.Location = new Point(9, 140);
             button13.Name = "button13";
             button13.Size = new Size(168, 48);
             button13.TabIndex = 25;
@@ -680,7 +696,7 @@ namespace Testing_the_GUI1
             button10.Name = "button10";
             button10.Size = new Size(161, 48);
             button10.TabIndex = 22;
-            button10.Text = "Move Stepmotor2 Right";
+            button10.Text = "Move Stepmotor 4 Right";
             button10.UseVisualStyleBackColor = false;
             button10.Click += button10_Click;
             // 
@@ -692,7 +708,7 @@ namespace Testing_the_GUI1
             button9.Name = "button9";
             button9.Size = new Size(168, 48);
             button9.TabIndex = 21;
-            button9.Text = "Move Stepmotor2 Left";
+            button9.Text = "Move Stepmotor 4 Left";
             button9.UseVisualStyleBackColor = false;
             button9.Click += button9_Click;
             // 
@@ -700,7 +716,7 @@ namespace Testing_the_GUI1
             // 
             button8.BackColor = Color.Red;
             button8.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button8.Location = new Point(183, 140);
+            button8.Location = new Point(183, 86);
             button8.Name = "button8";
             button8.Size = new Size(161, 48);
             button8.TabIndex = 20;
@@ -712,7 +728,7 @@ namespace Testing_the_GUI1
             // 
             button7.BackColor = Color.Green;
             button7.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button7.Location = new Point(9, 140);
+            button7.Location = new Point(9, 86);
             button7.Name = "button7";
             button7.Size = new Size(168, 48);
             button7.TabIndex = 19;
@@ -724,7 +740,7 @@ namespace Testing_the_GUI1
             // 
             button6.BackColor = Color.Red;
             button6.Font = new Font("Microsoft Sans Serif", 9.75F);
-            button6.Location = new Point(183, 86);
+            button6.Location = new Point(183, 140);
             button6.Name = "button6";
             button6.Size = new Size(161, 48);
             button6.TabIndex = 18;
@@ -820,7 +836,7 @@ namespace Testing_the_GUI1
             Name = "Form1";
             ShowIcon = false;
             StartPosition = FormStartPosition.Manual;
-            Text = "GuiTest1";
+            Text = "GUI Fordetect";
             TextChanged += comboBox1_SelectedIndexChanged;
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
@@ -892,5 +908,8 @@ namespace Testing_the_GUI1
         private Button button37;
         private Label label9;
         private Label label10;
+        private DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timer2;
     }
 }
